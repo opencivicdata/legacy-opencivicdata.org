@@ -4,7 +4,7 @@
             <div class="span6 signup span-divider">
                 <h4>Like this Project and Want to Discover Others Like It?</h4>
                 <span class="tip">Join the Sunlight Foundation's open government community to learn more</span>
-                <form action="/subscribe/" method="post" id="sfapp-subscribe-form" class="form-inline">
+                <form action="{{ site.subscribe_url }}" method="post" id="sfapp-subscribe-form" class="form-inline">
                     <input type="hidden" name="response" value="json">
                     <input type="text" name="email" placeholder="your email address">
                     <input type="text" name="zipcode" placeholder="your zip code">
