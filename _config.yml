@@ -1,6 +1,6 @@
 name: Open Civic Data
 markdown: redcarpet
 pygments: true
-debug: true
+debug: false
 ga_key: UA-22821126-40
 subscribe_url: "//sunlightfoundation.com/mailinglist/subscribe/"
