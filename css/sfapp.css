@@ -299,6 +299,18 @@ h3 {
     letter-spacing:1px;
 }
 
+.h3-subheader {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align:center;
+    max-width: 65%;
+    font-size:14px;
+    font-style: italic;
+    color: #B9B7B4;
+    margin-left:auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+}
+
 .line {
     line-height: 1;
     border-top: 1px solid rgba(255,255,255,.7);
