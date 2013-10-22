@@ -267,6 +267,7 @@ input[type=checkbox] { width: 15px; }
 
 ::selection { background: #7C8D00;}
 
+
 h1 span {
     border-bottom: none;
     display: block;
@@ -302,13 +303,15 @@ h3 {
 .h3-subheader {
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-align:center;
-    max-width: 65%;
-    font-size:14px;
+    max-width: 75%;
+    font-size: 16px;
+    line-height: 26px;
     font-style: italic;
-    color: #B9B7B4;
+    color: #898583;
     margin-left:auto;
     margin-right: auto;
     padding-bottom: 20px;
+    font-weight:normal;
 }
 
 .line {
@@ -338,48 +341,32 @@ h3 {
 }
 
 
-/*
-
-.line {
-    margin: 0 0 2em 0;
-    line-height: 0.5;
-    text-align: center;
-}
-
-.line span {
-  display: inline-block;
-  position: relative;
-}
-
-.line span:before,
-.line span:after {
-  content: "";
-  position: absolute;
-  height: 3px;
-  border-bottom: 1px solid green;
-  border-top: 1px solid green;
-  top: 0;
-  width: 100%;
-}
-
-.line span:before {
-  right: 100%;
-  margin-right: 15px;
-}
-.line span:after {
-  left: 100%;
-  margin-left: 15px;
-}
-*/
 .one-line span {
     font-weight: bold;
 }
 
 h4 {
-    font-style: italic;
+    font-family: "gnuolane", arial, sans-serif;
+    font-style: normal;
     font-size: 140%;
+    font-weight: normal;
+    letter-spacing:1px;
 }
 
+p {
+    color: #898583;
+    font-size: 13px;
+    line-height: 22px;
+    padding-bottom: 20px;
+}
+
+.span4 p {
+    height: 110px;
+}
+
+.sec1 p {
+    height: 80px;
+}
 
 a, a:active, a:visited {
     color: #BDB909;
@@ -395,6 +382,11 @@ a, a:active, a:visited {
 
 .top-pad {
     margin-top:50px;
+}
+
+.openingsec {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 50px;
 }
 
 .boxCallout {
@@ -459,14 +451,14 @@ a, a:active, a:visited {
 
 
     border:4px solid #F4F3EF;
-    width: 200px;
+    width: 268px;
 
     display:inline-block;
     color:#BDB909;
     font-family:Arial;
     font-size:14px;
     font-weight:bold;
-    padding:4px 14px;
+    padding:4px 10px;
     text-decoration:none;
     text-align:center;
 
