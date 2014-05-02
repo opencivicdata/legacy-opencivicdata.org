@@ -103,8 +103,8 @@ p {
     padding-bottom: 20px;
 }
 
-.span4 p {
-    height: 110px;
+.calltoaction p {
+    height: 130px;
 }
 
 .sec1 p {
@@ -133,15 +133,14 @@ a, a:active, a:visited {
 }
 
 .boxCallout {
-    margin-left: 55px;
     margin-top:75px;
+    margin-left: 15px;
     background-color: #F7F7F2;
     border: 4px solid #C7CC18;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 15px;
 }
 
 .boxCallout h3{
@@ -171,7 +170,6 @@ a, a:active, a:visited {
 
 
 .ocd-btn {
-
     -moz-box-shadow: 0px 1px 0px 0px #ffffff;
     -webkit-box-shadow: 0px 1px 0px 0px #ffffff;
     box-shadow: 0px 1px 0px 0px #ffffff;
@@ -194,7 +192,7 @@ a, a:active, a:visited {
 
 
     border:4px solid #F4F3EF;
-    width: 268px;
+    min-width: 268px;
 
     display:inline-block;
     color:#BDB909;
