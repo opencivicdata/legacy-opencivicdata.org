@@ -10,17 +10,8 @@
 
 ::selection { background: #7C8D00;}
 
-
-h1 span {
-    border-bottom: none;
-    display: block;
-    text-indent: -9999em;
-    font-height: 6px;
-
-}
-
-h1 {
-    margin-bottom: 0px;
+header {
+    margin-bottom: 20px;
 }
 
 h1.object {
@@ -217,12 +208,4 @@ a, a:active, a:visited {
 .ocd-btn:active {
     position:relative;
     top:1px;
-}
-
-
-.newfooter {
-    border-top: solid 1px #e5e5e5;
-    background-color:#f4f3ef;
-    padding-top: 40px;
-    padding-bottom: 40px;
 }
