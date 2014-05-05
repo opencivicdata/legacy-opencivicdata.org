@@ -33,16 +33,27 @@
 
         <div class="container">
             <header class="row">
-                <h1 class="col-md-8">
-                    <a href="http://opencivicdata.org/" title="Open Civic Data Project">
-                        <object class="img-responsive" data="/img/OpenCivicData-Logo-01.svg" type="image/svg+xml">
-                          <!--[if lte IE 8]>
-                          <img src="/img/OpenCivicData-Logo-01.png" width="544" height="202" class="img-responsive" alt="Open Civic Data">
-                          <![endif]-->
-                        </object>
-                    </a>
-                    <span class="sr-only">The Open Civic Data Project</span>
-                </h1>
+                <div class="col-md-7">
+                    <h1>
+                        <a href="http://opencivicdata.org/" title="Open Civic Data Project">
+                            <object class="img-responsive" data="/img/OpenCivicData-Logo-01.svg" type="image/svg+xml">
+                              <!--[if lte IE 8]>
+                              <img src="/img/OpenCivicData-Logo-01.png" width="544" height="202" class="img-responsive" alt="Open Civic Data">
+                              <![endif]-->
+                            </object>
+                        </a>
+                        <span class="sr-only">The Open Civic Data Project</span>
+                    </h1>
+                </div>
+                <div class="col-md-5">
+                    <nav>
+                        <ul class="nav nav-pills">
+                            <li><a href="/developers/">Developers</a></li>
+                            <li><a href="/government/">Government</a></li>
+                            <li><a href="/contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </header>
             {{ page.content }}
         </div>
