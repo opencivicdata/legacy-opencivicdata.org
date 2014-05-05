@@ -107,11 +107,9 @@ textarea:focus {
 
 ul.nav {
     margin-bottom: 0;
-    i {
+    li {
         margin-top: 2px;
         padding-right: 5px;
-    }
-    li {
         a { color: #222; }
         a:hover { background-color: inherit; color: #C9A706; }
     }

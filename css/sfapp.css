@@ -122,7 +122,7 @@ textarea:focus {
 
 ul.nav {
   margin-bottom: 0; }
-  ul.nav i {
+  ul.nav li {
     margin-top: 2px;
     padding-right: 5px; }
   ul.nav li a {

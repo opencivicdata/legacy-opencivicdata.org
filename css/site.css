@@ -209,3 +209,7 @@ a, a:active, a:visited {
     position:relative;
     top:1px;
 }
+
+ul.nav li a {
+    color: #BDB909;
+}
