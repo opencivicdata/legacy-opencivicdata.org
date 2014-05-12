@@ -14,9 +14,17 @@ header {
     margin-bottom: 20px;
 }
 
-h1.object {
-    height:20px;
-    width: 40px;
+header h1 {
+    margin-top: 0px;
+}
+
+h1 object {
+    min-width: 290px;
+}
+
+.nav-pills > li > a {
+    padding: 6px 4px;
+    font-weight: bold;
 }
 
 h2 {

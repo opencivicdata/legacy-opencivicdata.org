@@ -32,8 +32,8 @@
         </div>
 
         <div class="container">
-            <header class="row">
-                <div class="col-md-7">
+            <header id="ocd-header" class="row">
+                <div class="col-xs-12 col-lg-7">
                     <h1>
                         <object class="img-responsive" data="/img/OpenCivicData-Logo-01.svg" type="image/svg+xml">
                           <!--[if lte IE 8]>
@@ -43,17 +43,18 @@
                         <span class="sr-only">The Open Civic Data Project</span>
                     </h1>
                 </div>
-                <div class="col-md-5">
-                    <nav>
-                        <ul class="nav nav-pills">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/developers/">Developers</a></li>
-                            <li><a href="/government/">Government</a></li>
-                            <li><a href="/contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
             </header>
+            <div class="row">
+                <nav class="col-md-12">
+                    <ul class="listNav list-unstyled">
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/government/">For Governments</a></li>
+                        <li><a href="/developers/">For Developers</a></li>
+                        <li><a href="/about/">About Open Civic Data</a></li>
+                        <li class="first"><a href="/">Home</a></li>
+                    </ul>
+                </nav>
+            </div>
             {{ page.content }}
         </div>
        {% include footer.html %}

@@ -1,18 +1,61 @@
 ---
 layout: default
-title: About Open Civic Data
+title: What is Open Civic Data?
 bodyclass: home
 
 ---
 
-<h2>What is Open Civic Data?</h2>
+<div class="row">
+    <div class="col-md-8">
+        <h2 id="whyopencivicdata">Why Open Civic Data?</h2>
+        <p>There are currently 28 enacted Open Data Policies and over 450 data portals across the United States at the federal, state and local level. There is a clear need for this data, as well as a willingness by governments to provide it. But the way that information is published can make a huge difference in its reusability by other parties. In order to make this data as usable and accessible to as many people as possible, we've launched an effort to provide guidance on how to publish information regarding some of the most common entities in civic data: people, organizations, events, and bills.</p>
 
-<p class="intro">Since its inception, the Sunlight Foundation has used government data at the federal and state levels to encourage civic participation and increase citizens' access to their elected representatives. While Sunlight's tools and apps have had much success at the federal and state levels, in reality all politics is local. We seek to translate our previous successes to the municipal level with our Open Civic Data project.</p>
+        <p>These elements form the backbone of civic participation and government oversight and accountability. By standardizing how these elements appear in local data, the ability of technologists to use this data is greatly magnified. Standardization will also allow for apples-to-apples comparisons of datasets across city, county, and state jurisdictions, which assists advocacy groups, governments, and journalists.</p>
 
+        <h2 id="whatisopencivicdata">What is Open Civic Data?</h2>
 
-<p>More from framing doc. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Open Civic Data is centered around creating unique identifiers for the types of entities mentioned above. Tracking people or organizations across datasets, or even across different years of the same dataset, can be difficult when only names are used. For instance, in the United States House of Representatives, there are two congressmen named Mike Rogers. Tracking the votes or actions of these congressmen would be difficult for constituents if each one did not have a unique id. That identifier is used when reporting other information on the congressmen, making it clear which one is being referred to.</p>
+
+        <p>Open Civic Data also establishes the basic and minimum level of information that should be available for all of these elements. This kind of contextual data helps make other datasets that reference these elements more rich and usable for the purposes of oversight and accountability, as well as easier access to city services and elected officials.</p>
+
+        <p>The more governments that provide this information in compatible formats, the more citizen engagement tools can be leveraged for new municipalities. In other words, if a group of civic hackers in one city build an app to help citizens track all the activity of the local school board, that same app can be used in other cities, as long as the data is available in the format prescribed by Open Civic Data.</p>
+
+        <p>In addition to providing guidance on publishing these elements, Open Civic Data will also collect any information made available in this format into a common database that anyone can access. This will facilitate the reuse of this information across different jurisdictions and organizations.</p>
+
+        <p>Below are descriptions of the basic elements that make up Open Civic Data.</p>
+
+        <h3 id="people" class="line"><span class="line">People</span></h3>
+
+        <p>People are present in all kinds of municipal data. Elected representatives will show up in data related to campaign finance, lobbying and local elections. Unelected officials may show up in contracting or grant records, salary datasets, or directories of local services. Correctly and uniquely identifying people allows connections to reliably and automatically be made across separate datasets or multiple years of the same data.</p>
+
+        <p>For instance, if a journalist or government auditor were able to uniquely identify the same people across different years of salary data, they could use software to automatically detect indicators of abuse, such as an abnormally large percentage increase in salary year over year, as was the case with a Chicago school treasurer.</p>
+
+        <p>Using unique identifiers for people improves the interoperability of datasets and allows civic activists and technologists, as well as government officials, to scale up their transparency and oversight efforts without a large increase in resources. This means that fewer staff can be stretched further, to create apps and technology that foster civic participation and innovation, and to ensure better governance of public resources.</p>
+
+        <h3 id="organizations" class="line"><span class="line">Organizations</span></h3>
+
+        <p>Organizations can be any kind of civic body inside government. It may be a city council, a committee on that same city council, a school board, a commission on health, or a parent teacher association. Uniquely and reliably identifying organizations helps provide context to all kinds of other information. For example, votes from one body could be grouped together and sent out as email alerts to local civic associations. A journalist could quickly find all the press releases from the city council committee on taxes to write a story. A civic leader could integrate their calendar with event data to make sure they never miss a public meeting of the planning commission. The organizations in Open Civic Data exist primarily to categorize other types of information so that it's easy (and possible) to find information that is relevant to you.</p>
+
+        <p>Organizations can be grouped under other organizations, such as a city council that contains several committees or commissions. Organizations can have members, so that it's easy to uniquely identify people that are members of that organization, as well as the role they fill. Publishing the data in this way makes it possible for the local Friends of the Library chapter to easily contact everyone on their county's commission on libraries and discuss proposed funding cuts, for example.</p>
+
+        <h3 id="events" class="line"><span class="line">Events</span></h3>
+
+        <p>Events are perhaps the most important element of civic participation. Many citizens attend events sponsored by their local government, even if they aren't primarily related to governmental function. However, many local governments have event notices and announcements scattered across a variety of media and departments. This can make it difficult for citizens to easily access and be notified of meetings before they occur.</p>
+
+        <p>Event information in Open Civic Data records this information in a more organized manner. An event may be simple, including only date, time, and location, or it may be more extensive, including a variety of details, such as the participating organization, the people attending, and related documents or media. Linking events to other Open Civic Data entities makes it possible for citizens to filter events by those most important to them, such as those that include their representative as a participant, or have linked agenda documents that reference their neighborhood.</p>
+
+        <p>Providing event information in a rich context increases the likelihood that the key stakeholders for any particular event will be in attendance. Reaching the target audience for an event can be challenging, but by publishing events as open data and linking them to as many descriptive elements as possible, that audience is much more likely to discover and attend events that are relevant to them.</p>
+
+        <h3 id="bills" class="line"><span class="line">Bills</span></h3>
+
+        <p>Bills, ordinances, and other types of legislative documents provide much of the context for how constituents interact with their representatives. Making legislative documents online and accessible to everyone makes exchanges between representatives and citizens more informed and fruitful, in addition to being core to a transparent and accountable government.</p>
+
+        <p>Augmenting bills with people, organizations, and events (as described above) provides an even richer context for citizens to participate in the parts of government that affect them most directly. This type of structured information at the federal level has been used to create mobile apps, constituent feedback tools, congressional vote trackers, and more.</p>
+
+        <h2 id="makingyourdataavailable">Making Government Data Available</h2>
+
+        <p>Government data can becomes part of Open Civic Data in several ways. Governments could publish data in an Open Civic Data format, software could reads a local government's website and attempt to infer information from it ("scraped"), or it can be submitted as csv files, a text-based version of a spreadsheet. In an ideal scenario, governments will adopt the Open Civic Data format for the core elements described above, and will reuse these elements in as many of their datasets as possible, to allow for reliable linkages in their city's data. This type of adoption will allow for many of the examples described above.</p>
+
+        <p>Otherwise, local citizens or advocacy organizations may submit information about their local representatives or governing bodies, so that they can leverage pre-built technology for citizen engagement. Or perhaps they host a local hackathon and software developers build scrapers for local representatives, legislation and organizations. Open Civic Data will include data from all of these sources, in an effort to provide tools for an accountable and transparent government to as many localities as possible.</p>
+    </div>
+</div>
