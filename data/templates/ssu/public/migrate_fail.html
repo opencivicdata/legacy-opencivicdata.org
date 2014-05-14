@@ -1,0 +1,10 @@
+{% extends "ssu/public/base.html" %}
+
+{% block content %}
+
+<h1>Oops! Already approved!</h1>
+
+This was alreay approved by {{transaction.approved_by.username}}. Sorry about
+that, but the data's already in the production data.
+
+{% endblock %}

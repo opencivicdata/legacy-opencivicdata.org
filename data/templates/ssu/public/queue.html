@@ -1,0 +1,13 @@
+{% extends "ssu/public/base.html" %}
+
+{% block content %}
+
+<h1>{{uploads|length}} pending uploads</h1>
+
+<ul>
+{% for transaction in uploads %}
+    <li><a href="{% url "manage" transaction.id %}">{{transaction.jurisdiction_id}} - uploaded by {{transaction.user.username}}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "ssu/public/base.html" %}
+
+{% block content %}
+
+transaction id: {{transaction.id}}.<br />
+<br />
+The following people were added to the queue for review:<br />
+<br />
+
+<ul>
+{% for person in transaction.people.all %}
+
+    <li>{{person.name}} ({{person.district}})</li>
+
+{% endfor %}
+</ul>
+
+{% endblock %}

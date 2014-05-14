@@ -1,0 +1,14 @@
+{% extends "ssu/public/base.html" %}
+
+{% block content %}
+    Hello, World<br />
+    <br />
+
+    <form action="{% url "upload" %}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="sheet" size="chars"> <br />
+        <input type='hidden' value="ocd-jurisdiction/country:xx/council" name="jurisdiction" ></input> <br />
+        <input type='submit'></input> <br />
+        {% csrf_token %}
+    </form>
+
+{% endblock %}

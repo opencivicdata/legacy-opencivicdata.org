@@ -1,0 +1,68 @@
+{% extends "ssu/public/base.html" %}
+
+{% block content %}
+
+transaction id: {{transaction.id}}.<br />
+<br />
+The following people need review:<br />
+<br />
+
+This data was uploaded by <b>{{transaction.user.username}}</b>.
+
+{% for person in transaction.people.all %}
+<h1>{{person.name}}</h1>
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>{{person.name}}</td>
+    </tr>
+    <tr>
+        <td>District</td>
+        <td>{{person.district}}</td>
+    </tr>
+
+    {% for address in person.addresses.all %}
+    <tr>
+        <td>Address</td>
+        <td>{{address.address}}</td>
+    </tr>
+    {% endfor %}
+
+    {% for phone in person.phones.all %}
+    <tr>
+        <td>Phone</td>
+        <td>{{phone.phone}}</td>
+    </tr>
+    {% endfor %}
+
+    {% for email in person.emails.all %}
+    <tr>
+        <td>Email</td>
+        <td>{{email.email}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endfor %}
+
+{% if transaction.approved_by == None %}
+
+<h1>Migrate People</h1>
+
+If all this looks OK, we can do a migration:
+
+    <form action="{% url "migrate" %}" method="POST" >
+        <input type='hidden' value="{{transaction.id}}" name="transaction" ></input> <br />
+        <input type='submit'></input> <br />
+        {% csrf_token %}
+    </form>
+
+{% else %}
+
+<h1>Already Migrated</h1>
+
+This was already migrated by {{transaction.approved_by.username}}
+
+{% endif %}
+{% endblock %}
