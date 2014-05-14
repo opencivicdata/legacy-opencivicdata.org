@@ -1,5 +1,7 @@
 from django.shortcuts import render_to_response
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 from data.upload.backend.parser import import_stream, people_to_pupa
 from data.upload.backend.importer import do_import
@@ -7,10 +9,12 @@ from data.upload.models import SpreadsheetUpload
 from opencivicdata.models import Jurisdiction
 
 
+@login_required
 def home(request):
     return render_to_response("data/upload/public/index.html", {})
 
 
+@login_required
 def queue(request):
     return render_to_response("data/upload/public/queue.html", {
         "uploads": SpreadsheetUpload.objects.filter(
@@ -19,6 +23,7 @@ def queue(request):
     })
 
 
+@login_required
 @require_http_methods(["POST"])
 def upload(request):
     sheet = request.FILES['sheet']
@@ -37,6 +42,7 @@ def upload(request):
     })
 
 
+@staff_member_required
 def manage(request, transaction):
     transaction = SpreadsheetUpload.objects.get(id=int(transaction))
 
@@ -45,6 +51,7 @@ def manage(request, transaction):
     })
 
 
+@staff_member_required
 @require_http_methods(["POST"])
 def migrate(request):
     transaction_id = int(request.POST['transaction'])
