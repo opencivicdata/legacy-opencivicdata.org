@@ -1,18 +1,18 @@
 from django.shortcuts import render_to_response
 from django.views.decorators.http import require_http_methods
 
-from data.uploader.backend.parser import import_stream, people_to_pupa
-from data.uploader.backend.importer import do_import
-from data.uploader.backend.models import SpreadsheetUpload
+from data.upload.backend.parser import import_stream, people_to_pupa
+from data.upload.backend.importer import do_import
+from data.upload.models import SpreadsheetUpload
 from opencivicdata.models import Jurisdiction
 
 
 def home(request):
-    return render_to_response("data/uploader/public/index.html", {})
+    return render_to_response("data/upload/public/index.html", {})
 
 
 def queue(request):
-    return render_to_response("data/uploader/public/queue.html", {
+    return render_to_response("data/upload/public/queue.html", {
         "uploads": SpreadsheetUpload.objects.filter(
             approved_by__isnull=True
         ).all()
@@ -32,7 +32,7 @@ def upload(request):
         jurisdiction,
     )
 
-    return render_to_response("data/uploader/public/upload.html", {
+    return render_to_response("data/upload/public/upload.html", {
         "transaction": transaction,
     })
 
@@ -40,7 +40,7 @@ def upload(request):
 def manage(request, transaction):
     transaction = SpreadsheetUpload.objects.get(id=int(transaction))
 
-    return render_to_response("data/uploader/public/manage.html", {
+    return render_to_response("data/upload/public/manage.html", {
         "transaction": transaction,
     })
 
@@ -51,7 +51,7 @@ def migrate(request):
     transaction = SpreadsheetUpload.objects.get(id=transaction_id)
 
     if transaction.approved_by:
-        return render_to_response("data/uploader/public/migrate_fail.html", {
+        return render_to_response("data/upload/public/migrate_fail.html", {
             "transaction": transaction,
         })
 
@@ -67,7 +67,7 @@ def migrate(request):
     transaction.approved_by = approver
     transaction.save()
 
-    return render_to_response("data/uploader/public/migrate.html", {
+    return render_to_response("data/upload/public/migrate.html", {
         "transaction": transaction,
         "report": report,
     })
