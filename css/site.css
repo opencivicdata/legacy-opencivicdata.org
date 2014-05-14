@@ -82,6 +82,9 @@ h3 {
 
 }
 
+.line-wrapper {
+    margin-top: 30px;
+}
 
 .one-line span {
     font-weight: bold;
@@ -102,9 +105,23 @@ p {
     padding-bottom: 20px;
 }
 
-.calltoaction p {
-    height: 150px;
+.panel-ocd {
+    border: none;
+    border-radius: none;
+    box-shadow: none;
 }
+
+.panel-ocd > .panel-body {
+    height: 120px;
+    padding: 0 0 10px 0;
+}
+
+.panel-ocd > .panel-footer {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
 
 .sec1 p {
     height: 80px;
@@ -122,18 +139,7 @@ a, a:active, a:visited {
     color:#666666;
 }
 
-.top-pad {
-    margin-top:50px;
-}
-
-.openingsec {
-    border-bottom: 1px solid #e5e5e5;
-    margin-bottom: 50px;
-}
-
-.boxCallout {
-    margin-top:75px;
-    margin-left: 15px;
+.panel-sunlight {
     background-color: #F7F7F2;
     border: 4px solid #C7CC18;
     -webkit-border-radius: 4px;
@@ -142,13 +148,18 @@ a, a:active, a:visited {
     padding: 15px;
 }
 
-.boxCallout h3{
+.panel-sunlight h3{
     color: #635F5C;
 }
 
-.boxCallout p {
+.panel-sunlight p {
     text-align: left;
 }
+
+#updates {
+    margin-top:75px;
+}
+
 .social {
     padding-top:20px;
     height: 40px;
@@ -192,7 +203,7 @@ a, a:active, a:visited {
 
     border:4px solid #F4F3EF;
 
-    display:inline-block;
+    display: block;
     color:#BDB909;
     font-family:Arial;
     font-size:14px;
@@ -204,6 +215,11 @@ a, a:active, a:visited {
     margin-bottom: 50px;
 
 }
+
+.ocd-btn-inline {
+    display:inline-block;
+}
+
 .ocd-btn:hover {
 
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9) );
@@ -220,4 +236,18 @@ a, a:active, a:visited {
 
 ul.nav li a {
     color: #BDB909;
+}
+
+.listNav li {
+    margin-left: 6px;
+    padding-left: 6px;
+}
+
+@media (min-width: 768px) {
+
+    .listNav li {
+        margin-left: 20px;
+        padding-left: 20px;
+    }
+
 }
