@@ -2,6 +2,23 @@
     opencivicdata.org
 */
 
+
+a, a:active, a:visited {
+    color: #BDB909;
+}
+
+a:hover {
+    color: #7C8D00;
+}
+
+ul.nav li a {
+    color: #BDB909;
+}
+
+ul.nav li a:hover {
+    color: #7C8D00;
+}
+
 .module {
     border-bottom: 1px dashed #e1dddd;
     padding-bottom:30px;
@@ -122,15 +139,6 @@ p {
     padding: 0;
 }
 
-
-.sec1 p {
-    height: 80px;
-}
-
-a, a:active, a:visited {
-    color: #BDB909;
-}
-
 .intro {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
@@ -234,20 +242,26 @@ a, a:active, a:visited {
     top:1px;
 }
 
-ul.nav li a {
-    color: #BDB909;
+ul.nav-horizontal {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 120%;
 }
 
-.listNav li {
-    margin-left: 6px;
-    padding-left: 6px;
+ul.nav-horizontal .last {
+    border: none;
 }
 
-@media (min-width: 768px) {
+ul.nav-horizontal a:hover {
+    text-decoration: none;
+}
 
-    .listNav li {
-        margin-left: 20px;
-        padding-left: 20px;
-    }
+ul.nav-horizontal a:link, .nav-horizontal a:active, .nav-horizontal a:visited {
+    padding-bottom: 2px;
+}
 
+ul.nav-horizontal li {
+    border-right: 1px solid #E9E9E9;
+    float: left;
+    margin-right: 20px;
+    padding-right: 20px;
 }
