@@ -1,1 +1,3 @@
 _site/
+.rbenv-gemsets
+.gems
