@@ -2,8 +2,7 @@ import csv
 from data.upload.backend.xlrd import xlrd_dict_reader
 from data.upload.backend.csv import csv_dict_reader
 from data.upload.models import (SpreadsheetUpload, SpreadsheetPerson,
-                                SpreadsheetAddress, SpreadsheetPhone,
-                                SpreadsheetEmail)
+                                SpreadsheetContactDetail)
 
 from contextlib import contextmanager
 from pupa.scrape.helpers import Legislator
@@ -72,23 +71,22 @@ def import_parsed_stream(stream, user, jurisdiction):
         )
         who.save()
 
-        for address in ["Address 1", "Address 2", "Address 3"]:
-            where = person.get(address)
-            if where:
-                a = SpreadsheetAddress(person=who, address=where)
-                a.save()
-
-        for phone in ["Phone 1", "Phone 2", "Phone 3"]:
-            phone = person.get(phone)
-            if phone:
-                p = SpreadsheetPhone(person=who, phone=phone)
-                p.save()
-
-        for email in ["Email 1", "Email 2", "Email 3"]:
-            email = person.get(email)
-            if email:
-                e = SpreadsheetEmail(person=who, email=email)
-                e.save()
+        for (type, indexes) in [
+            ("address", ["Address 1", "Address 2", "Address 3"]),
+            ("voice", ["Phone 1", "Phone 2", "Phone 3"]),
+            ("email", ["Email 1", "Email 2", "Email 3"]),
+        ]:
+            for index in indexes:
+                value = person.get(index)
+                if value:
+                    a = SpreadsheetContactDetail(
+                        person=who,
+                        type=type,
+                        value=value,
+                        label=index,
+                        note="Imported by data.upload",
+                    )
+                    a.save()
 
     return upload
 

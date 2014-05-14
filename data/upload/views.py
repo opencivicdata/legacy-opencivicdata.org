@@ -66,7 +66,7 @@ def migrate(request):
 
     def migrate_spreadsheet(transaction):
         for person in transaction.people.all():
-            yield person.as_dict()
+            yield person.as_csv_dict()
 
     stream = people_to_pupa(migrate_spreadsheet(transaction), transaction)
     report = do_import(stream, transaction)

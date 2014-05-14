@@ -1,6 +1,9 @@
 import datetime as dt
+from collections import defaultdict
+
 from django.db import models
 from django.contrib.auth.models import User
+
 from opencivicdata.models.jurisdiction import Jurisdiction
 
 
@@ -20,31 +23,30 @@ class SpreadsheetPerson(models.Model):
     spreadsheet = models.ForeignKey(SpreadsheetUpload, related_name='people')
     # HStore here.
 
-    def as_dict(self):
+    def as_csv_dict(self):
         row = {"Name": self.name, "District": self.district,}
 
-        for i, address in enumerate(self.addresses.all(), start=1):
-            row['Address {}'.format(i)] = address.address
+        types = defaultdict(lambda: 1)
 
-        for i, phone in enumerate(self.phones.all(), start=1):
-            row['Phone {}'.format(i)] = phone.phone
-
-        for i, email in enumerate(self.emails.all(), start=1):
-            row['Email {}'.format(i)] = email.email
+        for contact in self.contacts.all():
+            class_, _ = contact.label.split(" ", 1)
+            slug = "%s %s" % ({
+                "address": "Address",
+                "voice": "Phone",
+                "email": "Email",
+            }[contact.type], types[contact.label])
+            types[contact.type] += 1
+            row[slug] = contact.value
 
         return row
 
 
-class SpreadsheetAddress(models.Model):
-    person = models.ForeignKey(SpreadsheetPerson, related_name='addresses')
-    address = models.TextField()
-
-
-class SpreadsheetPhone(models.Model):
-    person = models.ForeignKey(SpreadsheetPerson, related_name='phones')
-    phone = models.TextField()
-
-
-class SpreadsheetEmail(models.Model):
-    person = models.ForeignKey(SpreadsheetPerson, related_name='emails')
-    email = models.TextField()
+class SpreadsheetContactDetail(models.Model):
+    person = models.ForeignKey(
+        SpreadsheetPerson,
+        related_name='contacts'
+    )
+    type = models.TextField()
+    value = models.TextField()
+    label = models.TextField()
+    note = models.TextField()
