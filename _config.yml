@@ -1,7 +1,14 @@
 name: Open Civic Data
 markdown: redcarpet
-pygments: true
+highlighter: pygments
 debug: false
 ga_key: UA-22821126-40
 subscribe_url: "//sunlightfoundation.com/mailinglist/subscribe/"
 exclude: ['opencivicdata.org.sublime-project', 'opencivicdata.org.sublime-workspace', 's3_website.yml']
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      bodyclass: default
