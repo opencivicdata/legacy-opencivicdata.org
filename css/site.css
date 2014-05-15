@@ -242,26 +242,46 @@ p {
     top:1px;
 }
 
-ul.nav-horizontal {
+ul.nav-header {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 120%;
 }
 
-ul.nav-horizontal .last {
+ul.nav-header .last {
     border: none;
 }
 
-ul.nav-horizontal a:hover {
+ul.nav-header a:hover {
     text-decoration: none;
 }
 
-ul.nav-horizontal a:link, .nav-horizontal a:active, .nav-horizontal a:visited {
+ul.nav-header a:link, .nav-header a:active, .nav-header a:visited {
     padding-bottom: 2px;
 }
 
-ul.nav-horizontal li {
-    border-right: 1px solid #E9E9E9;
+ul.nav-header li {
+    border-right: 1px solid #F4F3EF;
     float: left;
-    margin-right: 20px;
-    padding-right: 20px;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+@media (min-width: 768px) and (max-width: 980px) {
+    ul.nav-header li {
+    margin-right: 5px;
+    padding-right: 5px;
+    }
+}
+
+@media (max-width: 767px) {
+    ul.nav-header li {
+        float: none;
+        border-bottom: 1px solid #F4F3EF;
+        margin: 4px 0;
+        padding: 4px 0;
+        border-right: none;
+    }
+    ul.nav-header a:link, .nav-header a:active, .nav-header a:visited {
+        padding: 5px 15px;
+    }
 }
