@@ -73,6 +73,14 @@ h3 {
     font-weight:normal;
 }
 
+#sitenav {
+    margin-bottom: 30px;
+}
+
+.intro strong {
+    font-weight: 500;
+}
+
 .line {
     line-height: 1;
     border-top: 1px solid rgba(255,255,255,.7);
