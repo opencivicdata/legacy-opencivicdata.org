@@ -39,6 +39,14 @@ h1 object {
     min-width: 290px;
 }
 
+.sf-footer .logo {
+    margin: 10px 0;
+}
+
+.logo-padded {
+    padding-top: 20px;
+}
+
 .nav-pills > li > a {
     padding: 6px 4px;
     font-weight: bold;
@@ -292,4 +300,13 @@ ul.nav-header li {
     ul.nav-header a:link, .nav-header a:active, .nav-header a:visited {
         padding: 5px 15px;
     }
+}
+
+@media (max-width: 360px) {
+
+    .sf-footer .logo {
+        margin: 40px 0;
+        padding: 0px;
+    }
+
 }

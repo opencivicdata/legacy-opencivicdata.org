@@ -6,6 +6,8 @@
         <meta name="keywords" content="Open Civic Data, Open Civic Data Project">
         <meta name="author" content="Sunlight Foundation">
 
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
         <meta property="og:title" content="Open Civic Data project" />
         <meta property="og:url" content="http://opencivicdata.org" />
         <meta property="og:type" content="website" />
@@ -33,11 +35,11 @@
 
         <div class="container">
             <header id="ocd-header" class="row">
-                <div class="col-xs-12 col-lg-7 col-lg-offset-1">
+                <div class="col-xs-12 col-lg-5 col-lg-offset-1">
                     <h1>
-                        <object class="img-responsive" data="/img/OpenCivicData-Logo-01.svg" type="image/svg+xml">
+                        <object class="logo img-responsive" data="/img/OpenCivicData-Logo-01.svg" type="image/svg+xml">
                           <!--[if lte IE 8]>
-                          <img src="/img/OpenCivicData-Logo-01.png" width="544" height="202" class="img-responsive" alt="Open Civic Data">
+                          <img xlink:href="/img/OpenCivicData-Logo-01.png" src="/img/OpenCivicData-Logo-01.png" width="544" height="202" alt="Open Civic Data">
                           <![endif]-->
                         </object>
                         <span class="sr-only">The Open Civic Data Project</span>
@@ -62,9 +64,9 @@
             </div>
         </div>
        {% include footer.html %}
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/sfapp.js"></script>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/sfapp.js"></script>
         <script src="//assets.sunlightfoundation.com.s3.amazonaws.com/social/scripts/simple-socialite-pack.min.js"></script>
 {% if !site.debug %}
         <script>
