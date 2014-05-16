@@ -12,3 +12,4 @@ defaults:
       path: ""
     values:
       bodyclass: default
+      layout: "default"
