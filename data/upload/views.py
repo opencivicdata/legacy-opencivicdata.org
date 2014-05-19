@@ -26,9 +26,16 @@ def queue(request):
 @login_required
 @require_http_methods(["POST"])
 def upload(request):
+    try:
+        jurisdiction = Jurisdiction.objects.get(id=request.POST['jurisdiction'])
+    except Jurisdiction.DoesNotExist:
+        return render_to_response("data/upload/public/upload_fail.html", {
+            "jurisdiction": request.POST['jurisdiction']
+        })
+
     sheet = request.FILES['sheet']
     _, xtn = sheet.name.rsplit(".", 1)
-    jurisdiction = Jurisdiction.objects.get(id=request.POST['jurisdiction'])
+
 
     transaction = import_stream(
         sheet.read(),

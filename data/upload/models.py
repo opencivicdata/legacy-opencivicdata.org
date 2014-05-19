@@ -21,10 +21,13 @@ class SpreadsheetPerson(models.Model):
     name = models.TextField()
     district = models.TextField()
     spreadsheet = models.ForeignKey(SpreadsheetUpload, related_name='people')
+    code = models.TextField()
     # HStore here.
 
     def as_csv_dict(self):
         row = {"Name": self.name, "District": self.district,}
+        if this.code:
+            row['Code'] = this.code
 
         types = defaultdict(lambda: 1)
 
