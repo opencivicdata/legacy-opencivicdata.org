@@ -21,20 +21,20 @@ def people_to_pupa(stream, transaction):
     for row in stream:
         # XXX: Validate the row better.
         name = row.get("Name", "").strip()
-        district = row.get("District", "").strip()
+        position = row.get("Position", "").strip()
         image = row.get("Image", None)
 
         if not name:
             raise ValueError("A name is required for each entry.")
 
-        if not district:
+        if not position:
             raise ValueError("A district is required for each entry.")
 
-        obj = Legislator(name=name, district=district)
+        obj = Legislator(name=name, district=position)
         if image:
             obj.image = image
 
-        org.add_post(label=district, role="member")
+        org.add_post(label=position, role="member")
 
         for key, keys in [
             ("email", ("Email 1", "Email 2", "Email 3")),
@@ -71,7 +71,7 @@ def import_parsed_stream(stream, user, jurisdiction):
         who = SpreadsheetPerson(
             name=person['Name'],
             spreadsheet=upload,
-            district=person['District'],
+            position=person['Position'],
         )
         who.save()
 
