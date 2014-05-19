@@ -22,7 +22,7 @@ def people_to_pupa(stream, transaction):
         # XXX: Validate the row better.
         name = row.get("Name", "").strip()
         district = row.get("District", "").strip()
-        code = row.get("Code", None)
+        image = row.get("Image", None)
 
         if not name:
             raise ValueError("A name is required for each entry.")
@@ -31,8 +31,9 @@ def people_to_pupa(stream, transaction):
             raise ValueError("A district is required for each entry.")
 
         obj = Legislator(name=name, district=district)
-        if code:
-            obj.code = code
+        if image:
+            obj.image = image
+
         org.add_post(label=district, role="member")
 
         for key, keys in [
