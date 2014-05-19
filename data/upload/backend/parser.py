@@ -1,3 +1,4 @@
+import re
 import csv
 from data.upload.backend.xlrd import xlrd_dict_reader
 from data.upload.backend.csv import csv_dict_reader
@@ -65,32 +66,41 @@ def import_parsed_stream(stream, user, jurisdiction):
     upload.save()
 
     for person in stream:
-        if not person['District'] or not person['Name']:
+        if (not person['District'] or not person['Name'] or
+                not person['Position']):
+
             raise ValueError("Bad district or name")
 
         who = SpreadsheetPerson(
-            name=person['Name'],
+            name=person.pop('Name'),
             spreadsheet=upload,
-            position=person['Position'],
+            position=person.pop('Position'),
+            district=person.pop('District'),
         )
         who.save()
 
-        for (type, indexes) in [
-            ("address", ["Address 1", "Address 2", "Address 3"]),
-            ("voice", ["Phone 1", "Phone 2", "Phone 3"]),
-            ("email", ["Email 1", "Email 2", "Email 3"]),
-        ]:
-            for index in indexes:
-                value = person.get(index)
-                if value:
-                    a = SpreadsheetContactDetail(
-                        person=who,
-                        type=type,
-                        value=value,
-                        label=index,
-                        note="Imported by data.upload",
-                    )
-                    a.save()
+        contact_details = [
+            "Address", "Phone", "Email", "Fax", "Cell",
+            "Twitter", "Facebook",
+        ]
+        links = ["Website", "Homepage"]
+        sources = ["Source"]
+
+        for key, value in person.items():
+            match = re.match("(?P<key>) \((?P<label>.*\))?", key)
+            print(match)
+
+        #    for index in indexes:
+        #        value = person.get(index)
+        #        if value:
+        #            a = SpreadsheetContactDetail(
+        #                person=who,
+        #                type=type,
+        #                value=value,
+        #                label=index,
+        #                note="Imported by data.upload",
+        #            )
+        #            a.save()
 
     return upload
 
