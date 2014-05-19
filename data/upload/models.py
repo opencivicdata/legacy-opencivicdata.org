@@ -26,8 +26,8 @@ class SpreadsheetPerson(models.Model):
 
     def as_csv_dict(self):
         row = {"Name": self.name, "District": self.district,}
-        if this.code:
-            row['Code'] = this.code
+        if self.code:
+            row['Code'] = self.code
 
         types = defaultdict(lambda: 1)
 
