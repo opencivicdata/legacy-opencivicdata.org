@@ -2,6 +2,24 @@
     opencivicdata.org
 */
 
+body {
+    color: #898583;
+}
+
+h4 {
+    font-family: "gnuolane", arial, sans-serif;
+    font-style: normal;
+    font-size: 150%;
+    font-weight: normal;
+    letter-spacing:1px;
+}
+
+p {
+    color: #898583;
+    font-size: 13px;
+    line-height: 22px;
+    margin-bottom: 20px;
+}
 
 a, a:active, a:visited {
     color: #BDB909;
@@ -9,6 +27,10 @@ a, a:active, a:visited {
 
 a:hover {
     color: #7C8D00;
+}
+
+ul {
+    margin-bottom: 20px;
 }
 
 ul.nav li a {
@@ -121,21 +143,6 @@ h3 {
 
 .one-line span {
     font-weight: bold;
-}
-
-h4 {
-    font-family: "gnuolane", arial, sans-serif;
-    font-style: normal;
-    font-size: 150%;
-    font-weight: normal;
-    letter-spacing:1px;
-}
-
-p {
-    color: #898583;
-    font-size: 13px;
-    line-height: 22px;
-    padding-bottom: 20px;
 }
 
 .panel-ocd {
