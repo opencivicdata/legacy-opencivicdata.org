@@ -37,7 +37,7 @@ def people_to_pupa(stream, transaction):
         if image:
             obj.image = image
 
-        org.add_post(label=district, role=position)
+        org.add_post(label="%s, %s" % (position, district), role=position)
 
         for detail in person.contacts.all():
             obj.add_contact_detail(
@@ -87,6 +87,8 @@ def import_parsed_stream(stream, user, jurisdiction):
             position=person.pop('Position'),
             district=person.pop('District'),
         )
+        if 'Image' in person:
+            who.image = person.pop("Image")
         who.save()
 
         contact_details = {
