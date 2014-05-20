@@ -52,7 +52,8 @@ def people_to_pupa(stream, transaction):
                 note=link.url
             )
 
-        for source in person.sources.all():
+        for source in (list(person.sources.all())
+                       + list(transaction.sources.all())):
             obj.add_source(
                 url=source.url,
                 note=source.note,

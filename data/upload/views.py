@@ -41,7 +41,6 @@ def upload(request):
         # XXX: Allow a list here.
     ]
 
-
     try:
         transaction = import_stream(
             sheet.read(),
