@@ -3,8 +3,8 @@ import csv
 from data.upload.backend.xlrd import xlrd_dict_reader
 from data.upload.backend.csv import csv_dict_reader
 from data.upload.models import (SpreadsheetUpload, SpreadsheetPerson,
-                                SpreadsheetSource, SpreadsheetLink,
-                                SpreadsheetContactDetail)
+                                SpreadsheetUploadSource, SpreadsheetPersonSource,
+                                SpreadsheetLink, SpreadsheetContactDetail)
 
 from contextlib import contextmanager
 from pupa.scrape.helpers import Legislator
@@ -71,9 +71,18 @@ def people_to_pupa(stream, transaction):
     yield org
 
 
-def import_parsed_stream(stream, user, jurisdiction):
+def import_parsed_stream(stream, user, jurisdiction, sources):
     upload = SpreadsheetUpload(user=user, jurisdiction=jurisdiction)
     upload.save()
+
+    for source in sources:
+        a = SpreadsheetUploadSource(
+            upload=upload,
+            url=source,
+            note="Default Spreadsheet Source"
+        )
+        a.save()
+
 
     for person in stream:
         if (not person['District'] or not person['Name'] or
@@ -113,7 +122,7 @@ def import_parsed_stream(stream, user, jurisdiction):
                 label = d['label'].rstrip(")").lstrip("(")
 
             if root in sources:
-                a = SpreadsheetSource(
+                a = SpreadsheetPersonSource(
                     person=who,
                     url=value,
                     note=key
@@ -150,17 +159,17 @@ def import_parsed_stream(stream, user, jurisdiction):
     return upload
 
 
-def import_stream(stream, extension, user, jurisdiction):
+def import_stream(stream, extension, user, jurisdiction, sources):
     reader = {"csv": csv_dict_reader,
               "xlsx": xlrd_dict_reader,
               "xls": xlrd_dict_reader}[extension]
 
-    return import_parsed_stream(reader(stream), user, jurisdiction)
+    return import_parsed_stream(reader(stream), user, jurisdiction, sources)
 
 
 @contextmanager
-def import_file_stream(fpath, user, jurisdiction):
+def import_file_stream(fpath, user, jurisdiction, sources):
     _, xtn = fpath.rsplit(".", 1)
 
     with open(fpath, 'br') as fd:
-        yield import_stream(fd, xtn, user, jurisdiction)
+        yield import_stream(fd, xtn, user, jurisdiction, sources)

@@ -36,6 +36,10 @@ def upload(request):
 
     sheet = request.FILES['sheet']
     _, xtn = sheet.name.rsplit(".", 1)
+    sources = [
+        request.POST['source']
+        # XXX: Allow a list here.
+    ]
 
 
     try:
@@ -44,6 +48,7 @@ def upload(request):
             xtn,
             request.user,
             jurisdiction,
+            sources,
         )
     except ValueError as e:
         return render_to_response("data/upload/public/upload_fail.html", {

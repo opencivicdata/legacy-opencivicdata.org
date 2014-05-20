@@ -47,9 +47,18 @@ class SpreadsheetLink(models.Model):
     note = models.TextField()
 
 
-class SpreadsheetSource(models.Model):
+class SpreadsheetPersonSource(models.Model):
     person = models.ForeignKey(
         SpreadsheetPerson,
+        related_name='sources'
+    )
+    url = models.TextField()
+    note = models.TextField()
+
+
+class SpreadsheetUploadSource(models.Model):
+    upload = models.ForeignKey(
+        SpreadsheetUpload,
         related_name='sources'
     )
     url = models.TextField()

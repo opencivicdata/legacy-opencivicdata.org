@@ -9,6 +9,23 @@ The following people need review:<br />
 
 This data was uploaded by <b>{{transaction.user.username}}</b>.
 
+<h1>Global sources</h1>
+
+<table>
+    <tr>
+        <th>Source</th>
+        <th>Note</th>
+        <th>Link</th>
+    </tr>
+{% for source in transaction.sources.all %}
+    <tr>
+        <td>Source</td>
+        <td>{{source.note}}</td>
+        <td><a href="{{source.url}}">{{source.url}}</a></td>
+    </tr>
+{% endfor %}
+</table>
+
 {% for person in transaction.people.all %}
 <h1>{{person.name}}</h1>
 
