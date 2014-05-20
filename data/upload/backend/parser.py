@@ -79,28 +79,61 @@ def import_parsed_stream(stream, user, jurisdiction):
         )
         who.save()
 
-        contact_details = [
-            "Address", "Phone", "Email", "Fax", "Cell",
-            "Twitter", "Facebook",
-        ]
+        contact_details = {
+            "Address": "address",
+            "Phone": "phone",
+            "Email": "email",
+            "Fax": "fax",
+            "Cell": "cell",
+            "Twitter": "twitter",
+            "Facebook": "facebook"
+        }
         links = ["Website", "Homepage"]
         sources = ["Source"]
 
         for key, value in person.items():
-            match = re.match("(?P<key>) \((?P<label>.*\))?", key)
-            print(match)
+            match = re.match("(?P<key>.*) (?P<label>\(.*\))?", key)
+            root = key
+            label = None
+            if match:
+                d = match.groupdict()
+                root = d['key']
+                label = d['label'].rstrip(")").lstrip("(")
 
-        #    for index in indexes:
-        #        value = person.get(index)
-        #        if value:
-        #            a = SpreadsheetContactDetail(
-        #                person=who,
-        #                type=type,
-        #                value=value,
-        #                label=index,
-        #                note="Imported by data.upload",
-        #            )
-        #            a.save()
+            if root in sources:
+                a = SpreadsheetSource(
+                    person=who,
+                    url=value,
+                    note=key
+                )
+                a.save()
+                continue
+
+            # If we've got a link.
+            if root in links:
+                a = SpreadsheetLink(
+                    person=who,
+                    link=value,
+                    note=key
+                )
+                a.save()
+                continue
+
+            # If we've got a contact detail.
+            if root in contact_details:
+                type_ = contact_details[root]
+                a = SpreadsheetContactDetail(
+                    person=who,
+                    type=type_,
+                    value=value,
+                    label=label or "",
+                    note=key,
+                )
+                a.save()
+                continue
+
+            raise ValueError("Unknown spreadhseet key: %s" % (key))
+
 
     return upload
 

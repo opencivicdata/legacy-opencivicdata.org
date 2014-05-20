@@ -28,8 +28,9 @@ def queue(request):
 def upload(request):
     try:
         jurisdiction = Jurisdiction.objects.get(id=request.POST['jurisdiction'])
-    except Jurisdiction.DoesNotExist:
+    except Jurisdiction.DoesNotExist as e:
         return render_to_response("data/upload/public/upload_fail.html", {
+            "exception": e,
             "jurisdiction": request.POST['jurisdiction']
         })
 
@@ -37,12 +38,20 @@ def upload(request):
     _, xtn = sheet.name.rsplit(".", 1)
 
 
-    transaction = import_stream(
-        sheet.read(),
-        xtn,
-        request.user,
-        jurisdiction,
-    )
+    try:
+        transaction = import_stream(
+            sheet.read(),
+            xtn,
+            request.user,
+            jurisdiction,
+        )
+    except ValueError as e:
+        return render_to_response("data/upload/public/upload_fail.html", {
+            "exception": e,
+            "jurisdiction": request.POST['jurisdiction']
+        })
+
+
 
     return render_to_response("data/upload/public/upload.html", {
         "transaction": transaction,
