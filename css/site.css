@@ -170,7 +170,7 @@ h3 {
     color:#666666;
 }
 
-.panel-sunlight {
+.panel-highlight {
     background-color: #F7F7F2;
     border: 4px solid #C7CC18;
     -webkit-border-radius: 4px;
@@ -179,11 +179,11 @@ h3 {
     padding: 15px;
 }
 
-.panel-sunlight h3{
+.panel-highlight h3{
     color: #635F5C;
 }
 
-.panel-sunlight p {
+.panel-highlight p {
     text-align: left;
 }
 
@@ -191,22 +191,16 @@ h3 {
     margin-top:75px;
 }
 
-.social {
-    padding-top:20px;
-    height: 40px;
-}
-
 .social h6 {
     float:left;
     font-family: georgia, serif;
     font-style:italic;
     padding: 0px;
-    margin: 0px 10px 0px 35px;
+    margin: 0 10px 0 0;
     color: #635f5c;
     font-size: 16px;
     font-weight: normal;
     text-transform: none;
-
 }
 
 
