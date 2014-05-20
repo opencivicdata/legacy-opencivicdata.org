@@ -79,12 +79,7 @@ def migrate(request):
         })
 
     approver = request.user
-
-    def migrate_spreadsheet(transaction):
-        for person in transaction.people.all():
-            yield person.as_csv_dict()
-
-    stream = people_to_pupa(migrate_spreadsheet(transaction), transaction)
+    stream = people_to_pupa(transaction.people.all(), transaction)
     report = do_import(stream, transaction)
 
     transaction.approved_by = approver

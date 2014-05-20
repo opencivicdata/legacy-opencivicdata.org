@@ -3,6 +3,7 @@ import csv
 from data.upload.backend.xlrd import xlrd_dict_reader
 from data.upload.backend.csv import csv_dict_reader
 from data.upload.models import (SpreadsheetUpload, SpreadsheetPerson,
+                                SpreadsheetSource, SpreadsheetLink,
                                 SpreadsheetContactDetail)
 
 from contextlib import contextmanager
@@ -19,35 +20,44 @@ def people_to_pupa(stream, transaction):
         classification='legislature',
     )
 
-    for row in stream:
-        # XXX: Validate the row better.
-        name = row.get("Name", "").strip()
-        position = row.get("Position", "").strip()
-        image = row.get("Image", None)
+    for person in stream:
+        name = person.name
+        position = person.position
+        district = person.district
+        image = person.image
 
-        if not name:
-            raise ValueError("A name is required for each entry.")
+        if not name or not district:
+            raise ValueError("A name and district is required for each entry.")
 
-        if not position:
-            raise ValueError("A district is required for each entry.")
+        if position is None:
+            position = "member"
 
-        obj = Legislator(name=name, district=position)
+        obj = Legislator(name=name, district=district)
+
         if image:
             obj.image = image
 
-        org.add_post(label=position, role="member")
+        org.add_post(label=district, role=position)
 
-        for key, keys in [
-            ("email", ("Email 1", "Email 2", "Email 3")),
-            ("address", ("Address 1", "Address 2", "Address 3")),
-            ("voice", ("Phone 1", "Phone 2", "Phone 3")),
-        ]:
-            for k in keys:
-                value = row.get(k)
-                if value:
-                    obj.add_contact_detail(type=key, value=value, note=k)
+        for detail in person.contacts.all():
+            obj.add_contact_detail(
+                type=detail.type,
+                value=detail.value,
+                note=detail.note,
+            )
 
-        obj.add_source(url=OCD_SOURCE_URL)
+        for link in person.links.all():
+            obj.add_link(
+                url=link.url,
+                note=link.url
+            )
+
+        for source in person.sources.all():
+            obj.add_source(
+                url=source.url,
+                note=source.note,
+            )
+
         obj.validate()
         obj.pre_save(transaction.jurisdiction.id)
 
@@ -81,10 +91,10 @@ def import_parsed_stream(stream, user, jurisdiction):
 
         contact_details = {
             "Address": "address",
-            "Phone": "phone",
+            "Phone": "voice",
             "Email": "email",
             "Fax": "fax",
-            "Cell": "cell",
+            "Cell": "voice",
             "Twitter": "twitter",
             "Facebook": "facebook"
         }
@@ -113,8 +123,8 @@ def import_parsed_stream(stream, user, jurisdiction):
             if root in links:
                 a = SpreadsheetLink(
                     person=who,
-                    link=value,
-                    note=key
+                    url=value,
+                    note=key,
                 )
                 a.save()
                 continue

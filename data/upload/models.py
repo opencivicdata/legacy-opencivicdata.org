@@ -19,32 +19,12 @@ class SpreadsheetUpload(models.Model):
 
 class SpreadsheetPerson(models.Model):
     name = models.TextField()
+    image = models.TextField()
     position = models.TextField()
     district = models.TextField()
     spreadsheet = models.ForeignKey(SpreadsheetUpload, related_name='people')
     code = models.TextField()
     # HStore here.
-
-    def as_csv_dict(self):
-        row = {"Name": self.name, "District": self.district,
-               "Position": self.position,}
-
-        if self.code:
-            row['Code'] = self.code
-
-        types = defaultdict(lambda: 1)
-
-        for contact in self.contacts.all():
-            class_, _ = contact.label.split(" ", 1)
-            slug = "%s %s" % ({
-                "address": "Address",
-                "voice": "Phone",
-                "email": "Email",
-            }[contact.type], types[contact.label])
-            types[contact.type] += 1
-            row[slug] = contact.value
-
-        return row
 
 
 class SpreadsheetContactDetail(models.Model):

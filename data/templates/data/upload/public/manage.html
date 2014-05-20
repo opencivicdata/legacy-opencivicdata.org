@@ -12,6 +12,10 @@ This data was uploaded by <b>{{transaction.user.username}}</b>.
 {% for person in transaction.people.all %}
 <h1>{{person.name}}</h1>
 
+{% if person.image %}
+    <img src="{{person.image}}" alt="{{person.name}}"/>
+{% endif %}
+
 <table>
     <tr>
         <td>Name</td>
@@ -21,28 +25,56 @@ This data was uploaded by <b>{{transaction.user.username}}</b>.
         <td>District</td>
         <td>{{person.position}}</td>
     </tr>
-
-    {% for address in person.addresses.all %}
+</table>
+<br />
+<br />
+<table>
     <tr>
-        <td>Address</td>
-        <td>{{address.address}}</td>
+        <th>What</th>
+        <th>Value</th>
+        <th>Note</th>
+        <th>Type</th>
+    </tr>
+    {% for detail in person.contacts.all %}
+    <tr>
+        <td>Contact Detail</td>
+        <td>{{detail.value}}</td>
+        <td>{{detail.note}}</td>
+        <td>{{detail.type}}</td>
     </tr>
     {% endfor %}
-
-    {% for phone in person.phones.all %}
+</table>
+<br />
+<br />
+<table>
     <tr>
-        <td>Phone</td>
-        <td>{{phone.phone}}</td>
+        <th>Link</th>
+        <th>URL</th>
+        <th>Note</th>
+    </tr>
+    {% for link in person.links.all %}
+    <tr>
+        <td>Link</td>
+        <td><a href="{{link.url}}">{{link.url}}</a></td>
+        <td>{{link.note}}</td>
     </tr>
     {% endfor %}
-
-    {% for email in person.emails.all %}
+</table>
+<br />
+<br />
+<table>
     <tr>
-        <td>Email</td>
-        <td>{{email.email}}</td>
+        <th>Source</th>
+        <th>URL</th>
+        <th>Note</th>
+    </tr>
+    {% for link in person.sources.all %}
+    <tr>
+        <td>Source</td>
+        <td><a href="{{link.url}}">{{link.url}}</a></td>
+        <td>{{link.note}}</td>
     </tr>
     {% endfor %}
-
 </table>
 {% endfor %}
 

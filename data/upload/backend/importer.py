@@ -1,13 +1,12 @@
 from pupa.scrape import (Jurisdiction, Person, Organization, Membership, Post)
-from pupa.importers import (JurisdictionImporter, OrganizationImporter,
-                            PersonImporter, PostImporter, MembershipImporter)
+from pupa.importers import (OrganizationImporter, PersonImporter, PostImporter,
+                            MembershipImporter)
 
 
 def do_import(stream, transaction):
     stream = list(stream)
     jurisdiction_id = transaction.jurisdiction.id
 
-    juris_importer = JurisdictionImporter(jurisdiction_id)
     org_importer = OrganizationImporter(jurisdiction_id)
     person_importer = PersonImporter(jurisdiction_id)
     post_importer = PostImporter(jurisdiction_id, org_importer)
@@ -27,7 +26,6 @@ def do_import(stream, transaction):
             yield el.as_dict()
 
 
-    report.update(juris_importer.import_data(tfilter(Jurisdiction, stream)))
     report.update(org_importer.import_data(tfilter(Organization, stream)))
     report.update(person_importer.import_data(tfilter(Person, stream)))
     report.update(post_importer.import_data(tfilter(Post, stream)))
