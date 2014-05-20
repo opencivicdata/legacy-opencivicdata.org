@@ -11,9 +11,6 @@ from pupa.scrape.helpers import Legislator
 from pupa.scrape.popolo import Organization
 
 
-OCD_SOURCE_URL = "http://opencivicdata.org/manual-data/source-notice"
-
-
 def people_to_pupa(stream, transaction):
     org = Organization(
         name=transaction.jurisdiction.name,
