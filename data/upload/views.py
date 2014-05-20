@@ -58,12 +58,12 @@ def upload(request):
     return redirect('manage', transaction.id)
 
 
-@staff_member_required
 def manage(request, transaction):
     transaction = SpreadsheetUpload.objects.get(id=int(transaction))
 
     return render_to_response("data/upload/public/manage.html", {
         "transaction": transaction,
+        "user": request.user,
     })
 
 

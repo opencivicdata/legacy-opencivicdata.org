@@ -101,6 +101,8 @@ This data was uploaded by <b>{{transaction.user.username}}</b>.
 
 {% if transaction.approved_by == None %}
 
+    {% if user.is_staff %}
+
 <h1>Migrate People</h1>
 
 If all this looks OK, we can do a migration:
@@ -110,6 +112,14 @@ If all this looks OK, we can do a migration:
         <input type='submit'></input> <br />
         {% csrf_token %}
     </form>
+
+    {% else %}
+
+<h1>Migration Status</h1>
+This change has not been migrated into the database yet. Please contact
+an administrator if you'd like to see this migrated.
+
+    {% endif %}
 
 {% else %}
 
