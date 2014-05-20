@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -55,11 +55,7 @@ def upload(request):
             "jurisdiction": request.POST['jurisdiction']
         })
 
-
-
-    return render_to_response("data/upload/public/upload.html", {
-        "transaction": transaction,
-    })
+    return redirect('manage', transaction.id)
 
 
 @staff_member_required
