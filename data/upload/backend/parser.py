@@ -31,6 +31,9 @@ def people_to_pupa(stream, transaction):
 
         obj = Legislator(name=name, district=district)
 
+        if person.party:
+            obj._party = person.party
+
         if image:
             obj.image = image
 
@@ -83,19 +86,28 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
 
 
     for person in stream:
-        if (not person['District'] or not person['Name'] or
-                not person['Position']):
-
+        if not person['Name']:
             raise ValueError("Bad district or name")
+
+        position = person.pop("Position")
+        district = person.pop("District")
+
+        if not position:
+            position = "member"
 
         who = SpreadsheetPerson(
             name=person.pop('Name'),
             spreadsheet=upload,
-            position=person.pop('Position'),
-            district=person.pop('District'),
+            position=position,
+            district=district,
         )
+
         if 'Image' in person:
             who.image = person.pop("Image")
+
+        if 'Party' in person:
+            who.party = person.pop("Party")
+
         who.save()
 
         contact_details = {
@@ -111,6 +123,10 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
         sources = ["Source"]
 
         for key, value in person.items():
+            if not value:
+                # 'errything is optional.
+                continue
+
             match = re.match("(?P<key>.*) (?P<label>\(.*\))?", key)
             root = key
             label = None
@@ -152,7 +168,6 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
                 continue
 
             raise ValueError("Unknown spreadhseet key: %s" % (key))
-
 
     return upload
 

@@ -46,6 +46,12 @@ This data was uploaded by <b>{{transaction.user.username}}</b>.
         <td>Position</td>
         <td>{{person.position}}</td>
     </tr>
+{% if person.party %}
+    <tr>
+        <td>Party</td>
+        <td>{{person.party}}</td>
+    </tr>
+{% endif %}
 </table>
 <br />
 <br />

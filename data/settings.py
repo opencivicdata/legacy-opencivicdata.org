@@ -68,3 +68,6 @@ INSTALLED_APPS = (
     'opencivicdata',
     'data.upload',
 )
+
+
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'

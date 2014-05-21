@@ -9,7 +9,6 @@ from data.upload.models import SpreadsheetUpload
 from opencivicdata.models import Jurisdiction
 
 
-@login_required
 def home(request):
     return render_to_response("data/upload/public/index.html", {})
 
@@ -23,7 +22,6 @@ def queue(request):
     })
 
 
-@login_required
 @require_http_methods(["POST"])
 def upload(request):
     try:
@@ -41,11 +39,15 @@ def upload(request):
         # XXX: Allow a list here.
     ]
 
+    user = request.user
+    if user.is_anonymous():
+        user = None
+
     try:
         transaction = import_stream(
             sheet.read(),
             xtn,
-            request.user,
+            user,
             jurisdiction,
             sources,
         )
