@@ -8,6 +8,8 @@ from data.upload.backend.importer import do_import
 from data.upload.models import SpreadsheetUpload
 from opencivicdata.models import Jurisdiction
 
+import json
+
 
 def home(request):
     return render_to_response("data/upload/public/index.html", {})
@@ -94,7 +96,9 @@ def migrate(request):
         report = do_import(stream, transaction)
         transaction.approved_by = request.user
         transaction.save()
+
         return render_to_response("data/upload/public/migrate.html", {
             "transaction": transaction,
             "report": report,
+            "report_pretty": json.dumps(report, indent=4),
         })

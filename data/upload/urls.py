@@ -10,5 +10,4 @@ urlpatterns = patterns('data.upload',
     url(r'^migrate/$', 'views.migrate', name='migrate'),
 
     url(r'^manage/(?P<transaction>.*)/$', 'views.manage', name='manage'),
-    url(r'^admin/', include(admin.site.urls)),
 )
