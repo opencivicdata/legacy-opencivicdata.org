@@ -109,7 +109,7 @@ This data was uploaded by a user that wasn't logged in.
 </table>
 {% endfor %}
 
-{% if transaction.approved_by == None %}
+{% if transaction.is_actionable %}
 
     {% if user.is_staff %}
 
@@ -119,7 +119,8 @@ If all this looks OK, we can do a migration:
 
     <form action="{% url "migrate" %}" method="POST" >
         <input type='hidden' value="{{transaction.id}}" name="transaction" ></input> <br />
-        <input type='submit'></input> <br />
+        <input type='submit' name='approve' value='approve'></input>
+        <input type='submit' name='reject' value='reject'></input><br />
         {% csrf_token %}
     </form>
 
@@ -133,9 +134,13 @@ an administrator if you'd like to see this migrated.
 
 {% else %}
 
-<h1>Already Migrated</h1>
+<h1>Action already taken</h1>
 
+{% if transaction.approved_by %}
 This was already migrated by {{transaction.approved_by.username}}
+{% else %}
+This was already rejected by {{transaction.rejected_by.username}}
+{% endif %}
 
 {% endif %}
 {% endblock %}

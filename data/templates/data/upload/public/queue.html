@@ -6,7 +6,7 @@
 
 <ul>
 {% for transaction in uploads %}
-    <li><a href="{% url "manage" transaction.id %}">{{transaction.jurisdiction_id}} - uploaded by {{transaction.user.username}}</a></li>
+<li><a href="{% url "manage" transaction.id %}">{{transaction.jurisdiction_id}} - uploaded by {% if transaction.user %}{{transaction.user.username}}{% else %}<i>an anonymous user</i>{% endif %}</a></li>
 {% endfor %}
 </ul>
 

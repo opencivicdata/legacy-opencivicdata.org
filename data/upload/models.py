@@ -10,6 +10,7 @@ from opencivicdata.models.jurisdiction import Jurisdiction
 class SpreadsheetUpload(models.Model):
     user = models.ForeignKey(User, related_name='uploads', null=True)
     approved_by = models.ForeignKey(User, related_name='approvals', null=True)
+    rejected_by = models.ForeignKey(User, related_name='rejections', null=True)
     jurisdiction = models.ForeignKey(
         Jurisdiction,
         related_name='uploads',
@@ -17,6 +18,9 @@ class SpreadsheetUpload(models.Model):
         # do a match against the jurisdiction we need.
     )
     created_at = models.DateTimeField(default=dt.datetime.utcnow())
+
+    def is_actionable(self):
+        return ((self.approved_by is None) and (self.rejected_by is None))
 
 
 class SpreadsheetPerson(models.Model):

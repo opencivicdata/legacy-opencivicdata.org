@@ -17,7 +17,8 @@ def home(request):
 def queue(request):
     return render_to_response("data/upload/public/queue.html", {
         "uploads": SpreadsheetUpload.objects.filter(
-            approved_by__isnull=True
+            approved_by__isnull=True,
+            rejected_by__isnull=True,
         ).all()
     })
 
@@ -75,19 +76,25 @@ def migrate(request):
     transaction_id = int(request.POST['transaction'])
     transaction = SpreadsheetUpload.objects.get(id=transaction_id)
 
-    if transaction.approved_by:
+    reject = False
+    if 'reject' in request.POST:
+        reject = True
+
+    if not transaction.is_actionable():
         return render_to_response("data/upload/public/migrate_fail.html", {
             "transaction": transaction,
         })
 
-    approver = request.user
-    stream = people_to_pupa(transaction.people.all(), transaction)
-    report = do_import(stream, transaction)
-
-    transaction.approved_by = approver
-    transaction.save()
-
-    return render_to_response("data/upload/public/migrate.html", {
-        "transaction": transaction,
-        "report": report,
-    })
+    if reject:
+        transaction.rejected_by = request.user
+        transaction.save()
+        return redirect('manage', transaction.id)
+    else:
+        stream = people_to_pupa(transaction.people.all(), transaction)
+        report = do_import(stream, transaction)
+        transaction.approved_by = request.user
+        transaction.save()
+        return render_to_response("data/upload/public/migrate.html", {
+            "transaction": transaction,
+            "report": report,
+        })
