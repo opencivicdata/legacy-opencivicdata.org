@@ -1,0 +1,4 @@
+-e git://github.com/sunlightlabs/sfapp.git#egg=sfapp
+Django>=1.7
+opencivicdata
+pupa
