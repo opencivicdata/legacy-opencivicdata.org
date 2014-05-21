@@ -7,7 +7,11 @@ transaction id: {{transaction.id}}.<br />
 The following people need review:<br />
 <br />
 
+{% if transaction.user %}
 This data was uploaded by <b>{{transaction.user.username}}</b>.
+{% else %}
+This data was uploaded by a user that wasn't logged in.
+{% endif %}
 
 <h1>Global sources</h1>
 
