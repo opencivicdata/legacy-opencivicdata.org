@@ -8,11 +8,12 @@ The Jurisdiction ID for this changeset is
 <code>{{transaction.jurisdiction.id}}</code>
 <br /><br />
 
+{% if transaction.user %}
+This data was uploaded by <b>{{transaction.user.username}}</b>.
+<br /><br />
 The following people need review:<br />
 <br />
 
-{% if transaction.user %}
-This data was uploaded by <b>{{transaction.user.username}}</b>.
 {% else %}
 This data was uploaded by a user that wasn't logged in.
 {% endif %}
@@ -38,7 +39,7 @@ This data was uploaded by a user that wasn't logged in.
 <h1>{{person.name}}</h1>
 
 {% if person.image %}
-    <img src="{{person.image}}" alt="{{person.name}}"/>
+    <img class='thumbnail' src="{{person.image}}" alt="{{person.name}}"/>
 {% endif %}
 
 <table>
@@ -123,8 +124,8 @@ If all this looks OK, we can do a migration:
 
     <form action="{% url "migrate" %}" method="POST" >
         <input type='hidden' value="{{transaction.id}}" name="transaction" ></input> <br />
-        <input type='submit' name='approve' value='approve'></input>
-        <input type='submit' name='reject' value='reject'></input><br />
+        <input class='btn-primary' type='submit' name='approve' value='approve'></input>
+        <input class='btn-danger' type='submit' name='reject' value='reject'></input><br />
         {% csrf_token %}
     </form>
 
@@ -141,9 +142,13 @@ an administrator if you'd like to see this migrated.
 <h1>Action already taken</h1>
 
 {% if transaction.approved_by %}
+<div class='alert-success'>
 This was already migrated by {{transaction.approved_by.username}}
+</div>
 {% else %}
+<div class='alert-danger'>
 This was already rejected by {{transaction.rejected_by.username}}
+</div>
 {% endif %}
 
 {% endif %}
