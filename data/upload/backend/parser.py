@@ -7,7 +7,7 @@ from data.upload.models import (SpreadsheetUpload, SpreadsheetPerson,
                                 SpreadsheetLink, SpreadsheetContactDetail)
 
 from contextlib import contextmanager
-from pupa.scrape.helpers import Legislator
+from pupa.scrape.helpers import Legislator, Person
 from pupa.scrape.popolo import Organization
 
 
@@ -23,21 +23,32 @@ def people_to_pupa(stream, transaction):
         district = person.district
         image = person.image
 
-        if not name or not district:
-            raise ValueError("A name and district is required for each entry.")
+        if not name:
+            raise ValueError("A name is required for each entry.")
 
         if position is None:
             position = "member"
 
-        obj = Legislator(name=name, district=district)
-
-        if person.party:
-            obj._party = person.party
+        if not district:
+            obj = Person(name=name)
+            # OK. Let's manually create the relation without the district.
+            # (If they don't have a district, it's assumed they're a member
+            #  of the org, but not a "legislator". Something like Mayor, where
+            #  they hold membership, but not a district).
+            obj.add_membership(
+                organization=org,
+                label=person.position,
+                role=person.position,
+            )
+            org.add_post(label=position, role=position)
+        else:
+            obj = Legislator(name=name, district=district)
+            org.add_post(label=district, role=position)
+            if person.party:
+                obj._party = person.party
 
         if image:
             obj.image = image
-
-        org.add_post(label="%s, %s" % (position, district), role=position)
 
         for detail in person.contacts.all():
             obj.add_contact_detail(
