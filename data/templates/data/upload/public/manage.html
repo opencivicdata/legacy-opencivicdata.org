@@ -2,8 +2,12 @@
 
 {% block content %}
 
-transaction id: {{transaction.id}}.<br />
-<br />
+
+<h1>Changeset {{transaction.id}} for <i>{{transaction.jurisdiction.name}}</i></h1>
+The Jurisdiction ID for this changeset is
+<code>{{transaction.jurisdiction.id}}</code>
+<br /><br />
+
 The following people need review:<br />
 <br />
 
