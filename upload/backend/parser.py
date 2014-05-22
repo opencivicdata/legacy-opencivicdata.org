@@ -6,6 +6,7 @@ from ..models import (SpreadsheetUpload, SpreadsheetPerson,
                       SpreadsheetUploadSource, SpreadsheetPersonSource,
                       SpreadsheetLink, SpreadsheetContactDetail)
 
+from collections import defaultdict
 from contextlib import contextmanager
 from pupa.scrape.helpers import Legislator, Person
 from pupa.scrape.popolo import Organization
@@ -16,6 +17,11 @@ def people_to_pupa(stream, transaction):
         name=transaction.jurisdiction.name,
         classification='legislature',
     )
+
+    for source in list(transaction.sources.all()):
+        org.add_source(url=source.url, note=source.note)
+
+    parties = defaultdict(list)
 
     for person in stream:
         name = person.name
@@ -46,6 +52,7 @@ def people_to_pupa(stream, transaction):
             org.add_post(label=district, role=position)
             if person.party:
                 obj._party = person.party
+                parties[person.party].append(person.sources.all())
 
         if image:
             obj.image = image
@@ -72,12 +79,25 @@ def people_to_pupa(stream, transaction):
 
         obj.validate()
         obj.pre_save(transaction.jurisdiction.id)
-
         yield obj
-
         for related in obj._related:
             yield related
 
+    for party in dict(parties):
+        party = Organization(classification='party', name=party)
+        sources = list(parties[party]) + list(transaction.sources.all())
+
+        for source in sources:
+            party.add_source(url=source.url, note=source.note)
+
+        party.validate()
+        party.pre_save(transaction.jurisdiction.id)
+        for related in party._related:
+            yield related
+        yield party
+
+    org.validate()
+    org.pre_save(transaction.jurisdiction.id)
     for related in org._related:
         yield related
     yield org
