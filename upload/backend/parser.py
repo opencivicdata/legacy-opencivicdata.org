@@ -61,13 +61,14 @@ def people_to_pupa(stream, transaction):
             obj.add_contact_detail(
                 type=detail.type,
                 value=detail.value,
+                # label=detail.label,  # Unexpected argument. Add?
                 note=detail.note,
             )
 
         for link in person.links.all():
             obj.add_link(
                 url=link.url,
-                note=link.url
+                note=link.note,
             )
 
         for source in (list(person.sources.all())
