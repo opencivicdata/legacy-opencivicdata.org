@@ -32,6 +32,14 @@ def people_to_pupa(stream, transaction):
         if not name:
             raise ValueError("A name is required for each entry.")
 
+        if name.lower() == "vacant":
+            # The following is so that we can create a post without a person
+            # attached to it, for vacant seats. Since all that we do
+            # below is create the Person, we can get away with just creating
+            # the post, without actually filling out the person.
+            org.add_post(label=position, role=position)
+            continue
+
         if position is None:
             position = "member"
 
