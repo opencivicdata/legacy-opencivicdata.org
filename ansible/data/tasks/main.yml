@@ -1,0 +1,4 @@
+---
+- name: migrate
+  command: /projects/{{project_name}}/virt/bin/python manage.py migrate chdir=/projects/{{project_name}}/src/data.opencivicdata.org
+  environment: django_environment

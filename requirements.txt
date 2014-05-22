@@ -1,4 +1,8 @@
 -e git://github.com/sunlightlabs/sfapp.git#egg=sfapp
-Django>=1.7
-opencivicdata
-pupa
+-e git://github.com/opencivicdata/pupa.git#egg=pupa
+-e git://github.com/opencivicdata/python-opencivicdata.git#egg=opencivicdata
+https://www.djangoproject.com/download/1.7.b4/tarball/
+psycopg2
+djorm-ext-pgarray
+jsonfield
+django-uuidfield
