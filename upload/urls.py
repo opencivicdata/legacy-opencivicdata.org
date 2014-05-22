@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 
-urlpatterns = patterns('data.upload',
+urlpatterns = patterns('upload',
     url(r'^$', 'views.home', name='home'),
     url(r'^queue/$', 'views.queue', name='queue'),
 

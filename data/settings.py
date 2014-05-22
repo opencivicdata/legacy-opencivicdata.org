@@ -66,7 +66,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'opencivicdata',
-    'data.upload',
+    'upload',
     'sfapp',
 )
 

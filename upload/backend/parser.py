@@ -1,10 +1,10 @@
 import re
 import csv
-from data.upload.backend.xlrd import xlrd_dict_reader
-from data.upload.backend.csv import csv_dict_reader
-from data.upload.models import (SpreadsheetUpload, SpreadsheetPerson,
-                                SpreadsheetUploadSource, SpreadsheetPersonSource,
-                                SpreadsheetLink, SpreadsheetContactDetail)
+from .xlrd import xlrd_dict_reader
+from .csv import csv_dict_reader
+from ..models import (SpreadsheetUpload, SpreadsheetPerson,
+                      SpreadsheetUploadSource, SpreadsheetPersonSource,
+                      SpreadsheetLink, SpreadsheetContactDetail)
 
 from contextlib import contextmanager
 from pupa.scrape.helpers import Legislator, Person
