@@ -44,7 +44,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
 )
 TEMPLATE_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), 'templates')),
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates')),
 )
 
 
