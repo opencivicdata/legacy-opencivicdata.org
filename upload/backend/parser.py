@@ -133,6 +133,9 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
             district=district,
         )
 
+        if 'Photo' in person:
+            who.image = person.pop("Photo")
+
         if 'Image' in person:
             who.image = person.pop("Image")
 
