@@ -150,10 +150,10 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
             "Email": "email",
             "Fax": "fax",
             "Cell": "voice",
-            "Twitter": "twitter",
-            "Facebook": "facebook"
         }
-        links = ["Website", "Homepage"]
+        links = ["Website", "Homepage",
+                 "Twitter", "Facebook",
+                 "Blog", "Webform"]
         sources = ["Source"]
 
         for key, value in person.items():
@@ -161,13 +161,13 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
                 # 'errything is optional.
                 continue
 
-            match = re.match("(?P<key>.*) (?P<label>\(.*\))?", key)
             root = key
             label = None
-            if match:
-                d = match.groupdict()
-                root = d['key']
-                label = d['label'].rstrip(")").lstrip("(")
+
+            if "(" in key:
+                root, label = key.rsplit("(", 1)
+                root = root.strip()
+                label = label.rstrip(")").strip()
 
             if root in sources:
                 a = SpreadsheetPersonSource(
