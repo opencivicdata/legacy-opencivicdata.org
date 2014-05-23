@@ -12,7 +12,10 @@ import json
 
 
 def home(request):
-    return render_to_response("data/upload/public/index.html", {})
+    jurisdictions = Jurisdiction.objects.all()
+    return render_to_response("data/upload/public/index.html", {
+        "jurisdictions": jurisdictions,
+    })
 
 
 @login_required
