@@ -69,6 +69,3 @@ INSTALLED_APPS = (
     'upload',
     'sfapp',
 )
-
-
-DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
