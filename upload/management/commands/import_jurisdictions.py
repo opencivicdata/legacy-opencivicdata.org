@@ -13,11 +13,19 @@ class Command(BaseCommand):
             stream = csv.DictReader(fd)
             for entry in stream:
                 division = Division.objects.get(id=entry['division'])
-                jurisdiction = Jurisdiction.objects.create(
-                    id=entry['jurisidiction'],
-                    division=division,
-                    name=entry['name']
-                )
+                try:
+                    print(entry)
+                    jurisdiction = Jurisdiction.objects.get(
+                        id=entry['jurisdiction']
+                    )
+                except Jurisdiction.DoesNotExist:
+                    jurisdiction = Jurisdiction()
+
+                jurisdiction.id = entry['jurisdiction']
+                jurisdiction.division = division
+                jurisdiction.name = entry['name']
+                jurisdiction.save()
+
                 print(jurisdiction)
 
     def handle(self, *args, **options):
