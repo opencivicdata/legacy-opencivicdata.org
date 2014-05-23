@@ -163,6 +163,7 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
         links = ["Website", "Homepage",
                  "Twitter", "Facebook",
                  "Blog", "Webform"]
+        ignore = ["Employer",]   # XXX: What to do there?
         sources = ["Source"]
 
         for key, value in person.items():
@@ -177,6 +178,10 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
                 root, label = key.rsplit("(", 1)
                 root = root.strip()
                 label = label.rstrip(")").strip()
+
+            root = root.strip()
+            if root in ignore:
+                continue
 
             if root in sources:
                 a = SpreadsheetPersonSource(
