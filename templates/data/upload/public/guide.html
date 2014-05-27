@@ -1,0 +1,85 @@
+{% extends "data/base.html" %}
+
+{% block content %}
+
+<h1>How to format your Spreadsheet</h1>
+
+The spreadsheet accepts data in a very simple format, which is aimed to cover
+input of the most basic information about a particular Jurisdiction.
+
+<h2>Basic Format</h2>
+
+<dl>
+    <!-- -->
+    <dt>Name</dt>
+    <dd>Name of the person that the data in the row corresponds to.</dd>
+
+    <!-- -->
+    <dt>District</dt>
+    <dd>District that the person represents. This may be empty for people
+        that don't have a district, such as a Mayor.</dd>
+
+    <!-- -->
+    <dt>Position</dt>
+    <dd>Position that the person holds, something like "Councilmember", or
+        "Mayor".</dd>
+
+    <!-- -->
+    <dt>Image</dt>
+    <dd>Headshot of the person. This is totally optional.</dd>
+
+    <!-- -->
+    <dt>Phone</dt>
+    <dd>Phone number for the person.</dd>
+
+    <!-- -->
+    <dt>Address</dt>
+    <dd>Postal address where one can send mail to this person.</dd>
+
+    <!-- -->
+    <dt>Email</dt>
+    <dd>Email address where one can send mail to this person.</dd>
+
+    <!-- -->
+    <dt>Fax</dt>
+    <dd>Facsimile address where one can send documents to this person.</dd>
+
+    <!-- -->
+    <dt>Cell</dt>
+    <dd>Cell phone number of the person.</dd>
+
+    <!-- -->
+    <dt>Website</dt>
+    <dd>Official website of this person.</dd>
+
+    <!-- -->
+    <dt>Homepage</dt>
+    <dd>Personal or official homepage of this person.</dd>
+
+    <!-- -->
+    <dt>Twitter</dt>
+    <dd>Twitter account of this person. Full URL.</dd>
+
+    <!-- -->
+    <dt>Facebook</dt>
+    <dd>Facebook account of this person. Full URL.</dd>
+
+    <!-- -->
+    <dt>Blog</dt>
+    <dd>Blog website of this person.</dd>
+
+    <!-- -->
+    <dt>Webform</dt>
+    <dd>Contact webform of this person. This is not the ideal method to collect
+        contact information for people.</dd>
+
+    <!-- -->
+    <dt>Employer</dt>
+    <dd>Person's employer.</dd>
+
+    <!-- -->
+    <dt>Source</dt>
+    <dd>Where you found the data you used for this person.</dd>
+</dl>
+
+{% endblock %}

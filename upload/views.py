@@ -18,6 +18,10 @@ def home(request):
     })
 
 
+def guide(request):
+    return render_to_response("data/upload/public/guide.html", {})
+
+
 @login_required
 def queue(request):
     return render_to_response("data/upload/public/queue.html", {

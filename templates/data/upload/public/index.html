@@ -1,6 +1,12 @@
 {% extends "data/base.html" %}
 
 {% block content %}
+
+    <h1>How to Upload</h1>
+
+    We accept data in a particular format - that format is documented on the
+    <a href="{% url "spreadsheet_guide" %}">Spreadsheet Guide</a>
+
     <h1>Upload new data</h1>
 
     <form action="{% url "upload" %}" method="POST" enctype="multipart/form-data">

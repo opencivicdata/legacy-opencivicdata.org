@@ -67,5 +67,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'opencivicdata',
     'upload',
+    'home',
     'sfapp',
 )
