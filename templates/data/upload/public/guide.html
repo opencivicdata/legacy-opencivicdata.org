@@ -9,6 +9,14 @@ input of the most basic information about a particular Jurisdiction.
 
 <h2>Basic Format</h2>
 
+You can include any subset of fields below, with the exception of
+<code>Name</code>, which is required for all sheets. In addition, you may
+add a <i>label</i> to any of the headers, which is denoted by surounding the
+label with parentheses after thee Header key. For instance, both
+<code>Address</code> and <code>Address (home)</code> are valid headers.
+
+<h2>Valid Keys</h2>
+
 <dl>
     <!-- -->
     <dt>Name</dt>
@@ -81,5 +89,37 @@ input of the most basic information about a particular Jurisdiction.
     <dt>Source</dt>
     <dd>Where you found the data you used for this person.</dd>
 </dl>
+
+<h2>Example Data</h2>
+
+<table border="1px">
+    <tr>
+        <th>Name</th>
+        <th>District</th>
+        <th>Position</th>
+        <th>Homepage</th>
+        <th>Phone (home)</th>
+        <th>Phone (office)</th>
+        <th>Source</th>
+    </tr>
+    <tr>
+        <td>Jenny</td>
+        <td>Ward 1</td>
+        <td>Councilmember</td>
+        <td>http://legislature.example.com/jenny</td>
+        <td>876-5309</td>
+        <td></td>
+        <td>http://legislature.example.com/jenny</td>
+    </tr>
+    <tr>
+        <td>Tommy</td>
+        <td>Ward 2</td>
+        <td>Councilmember</td>
+        <td>http://legislature.example.com/tommy</td>
+        <td>555-5555</td>
+        <td>555-8888</td>
+        <td>http://legislature.example.com/tommy</td>
+    </tr>
+</table>
 
 {% endblock %}
