@@ -3,10 +3,15 @@ from opencivicdata.models import Jurisdiction
 from django import forms
 
 
+class JurisdictionModelChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.id
+
+
 class SpreadsheetUploadForm(forms.Form):
-    jurisdiction = forms.ModelChoiceField(
+    jurisdiction = JurisdictionModelChoiceField(
+        empty_label=None,
         queryset=Jurisdiction.objects.all(),
-        to_field_name="id"
     )
     source = forms.CharField()
     sheet = forms.FileField()
