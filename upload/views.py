@@ -2,9 +2,11 @@ from django.shortcuts import render_to_response, redirect
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.conf import settings
 
 from .backend.parser import import_stream, people_to_pupa
 from .backend.importer import do_import
+from .forms import SpreadsheetUploadForm
 from .models import SpreadsheetUpload
 from opencivicdata.models import Jurisdiction
 
@@ -12,6 +14,18 @@ import json
 
 
 def home(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect('/success/url/')
+    else:
+        form = SpreadsheetUploadForm()
+    return render_to_response('data/upload/public/index.html', {
+        'form': form
+    })
+
+
     jurisdictions = Jurisdiction.objects.all()
     return render_to_response("data/upload/public/index.html", {
         "jurisdictions": jurisdictions,

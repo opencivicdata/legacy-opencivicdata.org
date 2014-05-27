@@ -10,40 +10,8 @@
     <h1>Upload new data</h1>
 
     <form action="{% url "upload" %}" method="POST" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <td>Jurisdiction</td>
-                <td>
-                    <select name="jurisdiction">
-                        {% for jurisdiction in jurisdictions %}
-                        <option value="{{jurisdiction.id}}">{{jurisdiction.name}} ({{jurisdiction.id}})</option>
-                        {% endfor %}
-                    </select>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Where was the data found?</td>
-                <td>
-                    <input type="text" name="source"></input><br />
-                </td>
-            </tr>
-
-            <tr>
-                <td>Spreadsheet</td>
-                <td>
-            <input type="file" name="sheet" size="chars"></input> <br />
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <input type='submit'></input>
-                </td>
-                <td></td>
-            </tr>
-
-        </table>
         {% csrf_token %}
+        {{ form.as_p }}
+        </table>
     </form>
 {% endblock %}
