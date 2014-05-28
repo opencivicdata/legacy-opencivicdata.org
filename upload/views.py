@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -21,24 +21,23 @@ def home(request):
             return HttpResponseRedirect('/success/url/')
     else:
         form = SpreadsheetUploadForm()
-    return render_to_response('data/upload/public/index.html', {
-        'form': form
-    })
+
+    return render(request, 'data/upload/public/index.html', {"form": form})
 
 
     jurisdictions = Jurisdiction.objects.all()
-    return render_to_response("data/upload/public/index.html", {
+    return render(request, "data/upload/public/index.html", {
         "jurisdictions": jurisdictions,
     })
 
 
 def guide(request):
-    return render_to_response("data/upload/public/guide.html", {})
+    return render(request, "data/upload/public/guide.html", {})
 
 
 @login_required
 def queue(request):
-    return render_to_response("data/upload/public/queue.html", {
+    return render(request, "data/upload/public/queue.html", {
         "uploads": SpreadsheetUpload.objects.filter(
             approved_by__isnull=True,
             rejected_by__isnull=True,
@@ -51,7 +50,7 @@ def upload(request):
     try:
         jurisdiction = Jurisdiction.objects.get(id=request.POST['jurisdiction'])
     except Jurisdiction.DoesNotExist as e:
-        return render_to_response("data/upload/public/upload_fail.html", {
+        return render(request, "data/upload/public/upload_fail.html", {
             "exception": e,
             "jurisdiction": request.POST['jurisdiction']
         })
@@ -76,7 +75,7 @@ def upload(request):
             sources,
         )
     except ValueError as e:
-        return render_to_response("data/upload/public/upload_fail.html", {
+        return render(request, "data/upload/public/upload_fail.html", {
             "exception": e,
             "jurisdiction": request.POST['jurisdiction']
         })
@@ -87,7 +86,7 @@ def upload(request):
 def manage(request, transaction):
     transaction = SpreadsheetUpload.objects.get(id=int(transaction))
 
-    return render_to_response("data/upload/public/manage.html", {
+    return render(request, "data/upload/public/manage.html", {
         "transaction": transaction,
         "user": request.user,
     })
@@ -104,7 +103,7 @@ def migrate(request):
         reject = True
 
     if not transaction.is_actionable():
-        return render_to_response("data/upload/public/migrate_fail.html", {
+        return render(request, "data/upload/public/migrate_fail.html", {
             "transaction": transaction,
         })
 
@@ -118,7 +117,7 @@ def migrate(request):
         transaction.approved_by = request.user
         transaction.save()
 
-        return render_to_response("data/upload/public/migrate.html", {
+        return render(request, "data/upload/public/migrate.html", {
             "transaction": transaction,
             "report": report,
             "report_pretty": json.dumps(report, indent=4),
