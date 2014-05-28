@@ -30,20 +30,6 @@ def home(request):
     })
 
 
-def guide(request):
-    return render(request, "data/upload/public/guide.html", {})
-
-
-@login_required
-def queue(request):
-    return render(request, "data/upload/public/queue.html", {
-        "uploads": SpreadsheetUpload.objects.filter(
-            approved_by__isnull=True,
-            rejected_by__isnull=True,
-        ).all()
-    })
-
-
 @require_http_methods(["POST"])
 def upload(request):
     try:
@@ -80,6 +66,20 @@ def upload(request):
         })
 
     return redirect('manage', transaction.id)
+
+
+def guide(request):
+    return render(request, "data/upload/public/guide.html", {})
+
+
+@login_required
+def queue(request):
+    return render(request, "data/upload/public/queue.html", {
+        "uploads": SpreadsheetUpload.objects.filter(
+            approved_by__isnull=True,
+            rejected_by__isnull=True,
+        ).all()
+    })
 
 
 def manage(request, transaction):
