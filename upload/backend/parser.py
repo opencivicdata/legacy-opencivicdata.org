@@ -126,45 +126,45 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
 
 
     for person in stream:
-        if not person['Name']:
+        if not person['name']:
             raise ValueError("Bad district or name")
 
-        position = person.pop("Position")
-        district = person.pop("District")
+        position = person.pop("position")
+        district = person.pop("district")
 
         if not position:
             position = "member"
 
         who = SpreadsheetPerson(
-            name=person.pop('Name'),
+            name=person.pop('name'),
             spreadsheet=upload,
             position=position,
             district=district,
         )
 
-        if 'Photo' in person:
-            who.image = person.pop("Photo")
+        if 'photo' in person:
+            who.image = person.pop("photo")
 
-        if 'Image' in person:
-            who.image = person.pop("Image")
+        if 'image' in person:
+            who.image = person.pop("image")
 
-        if 'Party' in person:
-            who.party = person.pop("Party")
+        if 'party' in person:
+            who.party = person.pop("party")
 
         who.save()
 
         contact_details = {
-            "Address": "address",
-            "Phone": "voice",
-            "Email": "email",
-            "Fax": "fax",
-            "Cell": "voice",
+            "address": "address",
+            "phone": "voice",
+            "email": "email",
+            "fax": "fax",
+            "cell": "voice",
         }
-        links = ["Website", "Homepage",
-                 "Twitter", "Facebook",
-                 "Blog", "Webform"]
-        ignore = ["Employer",]   # XXX: What to do there?
-        sources = ["Source"]
+        links = ["website", "homepage",
+                 "twitter", "facebook",
+                 "blog", "webform"]
+        ignore = ["employer",]   # XXX: What to do there?
+        sources = ["source"]
 
         for key, value in person.items():
             if not value:
@@ -187,7 +187,7 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
                 a = SpreadsheetPersonSource(
                     person=who,
                     url=value,
-                    note=key
+                    note="",
                 )
                 a.save()
                 continue
@@ -197,7 +197,7 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
                 a = SpreadsheetLink(
                     person=who,
                     url=value,
-                    note=key,
+                    note="",
                 )
                 a.save()
                 continue
@@ -210,7 +210,7 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
                     type=type_,
                     value=value,
                     label=label or "",
-                    note=key,
+                    note="",
                 )
                 a.save()
                 continue
