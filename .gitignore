@@ -2,3 +2,4 @@
 *pyc
 *data*egg*
 .vagrant
+local_settings.py

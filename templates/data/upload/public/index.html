@@ -4,6 +4,15 @@
 
     <h1>How to Upload</h1>
 
+    <p>
+    {% if user == None %}
+        You're not currently logged in. If you want to connect yourself
+        to this dataset, please <a href="/login/sunlight/" >Login</a>
+    {% else %}
+        You're currently logged in as {{user.first_name}} {{user.last_name}}.
+    {% endif %}
+    </p>
+
     We accept data in a particular format - that format is documented on the
     <a href="{% url "spreadsheet_guide" %}">Spreadsheet Guide</a>
 

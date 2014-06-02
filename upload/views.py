@@ -21,12 +21,20 @@ def home(request):
     else:
         form = SpreadsheetUploadForm()
 
-    return render(request, 'data/upload/public/index.html', {"form": form})
+    user = request.user
+    if user.is_anonymous():
+        user = None
+
+    return render(request, 'data/upload/public/index.html', {
+        "form": form,
+        "user": user,
+    })
 
 
     jurisdictions = Jurisdiction.objects.all()
     return render(request, "data/upload/public/index.html", {
         "jurisdictions": jurisdictions,
+        "user": user,
     })
 
 

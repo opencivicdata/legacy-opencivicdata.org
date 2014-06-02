@@ -57,8 +57,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 STATIC_URL = '/static/'
-
 LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/upload/'
 
 
 INSTALLED_APPS = (
@@ -68,8 +68,23 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
     'opencivicdata',
     'upload',
     'home',
     'sfapp',
 )
+
+# Sunlighauth bits. This requires that django-sunlightauth is installed.
+
+AUTHENTICATION_BACKENDS = (
+    'sunlightauth.backends.SunlightBackend',
+)
+
+# SOCIAL_AUTH_SUNLIGHT_KEY = 'SET IN DJANGO LOCAL SETTINGS'
+# SOCIAL_AUTH_SUNLIGHT_SECRET = 'SET IN DJANGO LOCAL SETTINGS'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
