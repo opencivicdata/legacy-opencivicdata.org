@@ -23,7 +23,6 @@ ocd-division/country:us/state:ga/place:columbus,ocd-jurisdiction/country:us/stat
 ocd-division/country:us/state:il/county:cook/place:evanston,ocd-jurisdiction/country:us/state:il/county:cook/place:evanston/government,"Evanston, IL"
 ocd-division/country:us/state:ks/place:kansas_city,ocd-jurisdiction/country:us/state:ks/place:kansas_city/government,"Kansas City"
 ocd-division/country:us/state:tx/county:montgomery,ocd-jurisdiction/country:us/state:tx/county:montgomery/government,"Montgomery, TX"
-ocd-division/country:us/state:sc/place:myrtle_beach,ocd-jurisdiction/country:us/state:sc/place:myrtle_beach/government,"Myrtle Beach"
 ocd-division/country:us/state:ca/place:palo_alto,ocd-jurisdiction/country:us/state:ca/place:palo_alto/government,"Palo Alto, CA"
 ocd-division/country:us/state:va/place:richmond,ocd-jurisdiction/country:us/state:va/place:richmond/government,"Richmond, VA"
 ocd-division/country:us/state:wi/place:whitewater,ocd-jurisdiction/country:us/state:wi/place:whitewater/government,"Whitewater, WI"
