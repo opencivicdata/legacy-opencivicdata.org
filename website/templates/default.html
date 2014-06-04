@@ -12,10 +12,10 @@
         <meta property="og:url" content="http://opencivicdata.org" />
         <meta property="og:type" content="website" />
         <meta property="og:description" content="The new Open Civic Data project brings your hometown online. Learn how you can help." />
-        <meta property="og:image" content="http://opencivicdata.org/img/OpenCivicDatafb.png" />
+        <meta property="og:image" content="{% static 'website/img/OpenCivicDatafb.png' %}" />
         <meta property="fb:admins" content="7406790" />
 
-        <title>{{ pagetitle }}{% if pagetitle %} | {% endif %}Open Civic Data</title>
+        <title>{% block pagetitle %}Home{% endblock pagetitle %} | Open Civic Data</title>
 
         {% include "includes/head.html" %}
         <script type="text/javascript" src="//use.typekit.com/tab6neo.js"></script>
@@ -39,7 +39,7 @@
                     <h1>
                         <object class="logo img-responsive" data="{% static 'website/img/OpenCivicData-Logo-01.svg' %}" type="image/svg+xml">
                           <!--[if lte IE 8]>
-                          <img xlink:href="/img/OpenCivicData-Logo-01.png" src="{% static 'website/img/OpenCivicData-Logo-01.png' %}" width="544" height="202" alt="Open Civic Data">
+                          <img xlink:href="{% static 'website/img/OpenCivicData-Logo-01.png' %}" src="{% static 'website/img/OpenCivicData-Logo-01.png' %}" width="544" height="202" alt="Open Civic Data">
                           <![endif]-->
                         </object>
                         <span class="sr-only">The Open Civic Data Project</span>
