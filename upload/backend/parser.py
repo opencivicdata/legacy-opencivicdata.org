@@ -160,9 +160,14 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
             "fax": "fax",
             "cell": "voice",
         }
+
         links = ["website", "homepage",
                  "twitter", "facebook",
-                 "blog", "webform"]
+                 "google+", "instagram",
+                 "linkedin", "flickr",
+                 "youtube", "blog",
+                 "webform"]
+
         ignore = ["employer",]   # XXX: What to do there?
         sources = ["source"]
 
