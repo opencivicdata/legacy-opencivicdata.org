@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html>{% load staticfiles %}
 <html>
     <head>
         <meta charset="utf-8">
@@ -15,21 +15,21 @@
         <meta property="og:image" content="http://opencivicdata.org/img/OpenCivicDatafb.png" />
         <meta property="fb:admins" content="7406790" />
 
-        <title>{{ page.title }}{% if page.title %} | {% endif %}Open Civic Data</title>
+        <title>{{ pagetitle }}{% if pagetitle %} | {% endif %}Open Civic Data</title>
 
-        {% include head.html %}
+        {% include "includes/head.html" %}
         <script type="text/javascript" src="//use.typekit.com/tab6neo.js"></script>
         <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/sfapp.css">
-        <link rel="stylesheet" href="/css/site.css">
-        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="stylesheet" href="{% static 'sfapp/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'sfapp/css/sfapp.css' %}">
+        <link rel="stylesheet" href="{% static 'website/css/site.css' %}">
+        <link rel="icon" type="image/x-icon" href="{% static 'website/favicon.ico' %}" />
 
     </head>
     <body class="{{ page.bodyclass }}">
         <div class="sf-header">
             <div class="container">
-                {% include header.html %}
+                {% include "includes/header.html" %}
             </div>
         </div>
 
@@ -37,9 +37,9 @@
             <header id="ocd-header" class="row">
                 <div class="col-xs-12 col-lg-5 col-lg-offset-1">
                     <h1>
-                        <object class="logo img-responsive" data="/img/OpenCivicData-Logo-01.svg" type="image/svg+xml">
+                        <object class="logo img-responsive" data="{% static 'website/img/OpenCivicData-Logo-01.svg' %}" type="image/svg+xml">
                           <!--[if lte IE 8]>
-                          <img xlink:href="/img/OpenCivicData-Logo-01.png" src="/img/OpenCivicData-Logo-01.png" width="544" height="202" alt="Open Civic Data">
+                          <img xlink:href="/img/OpenCivicData-Logo-01.png" src="{% static 'website/img/OpenCivicData-Logo-01.png' %}" width="544" height="202" alt="Open Civic Data">
                           <![endif]-->
                         </object>
                         <span class="sr-only">The Open Civic Data Project</span>
@@ -68,16 +68,16 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-lg-10 col-lg-offset-1">
-                    {{ page.content }}
+{% block content %}{% endblock content %}
                 </div>
             </div>
         </div>
-       {% include footer.html %}
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/sfapp.js"></script>
+       {% include "includes/footer.html" %}
+        <script src="{% static 'sfapp/js/jquery.min.js' %}"></script>
+        <script src="{% static 'sfapp/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'sfapp/js/sfapp.js' %}"></script>
         <script src="//assets.sunlightfoundation.com.s3.amazonaws.com/social/scripts/simple-socialite-pack.min.js"></script>
-{% if !site.debug %}
+{% if DEBUG %}
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
