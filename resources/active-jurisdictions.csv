@@ -15,7 +15,6 @@ ocd-division/country:us/state:mn/place:st_paul,ocd-jurisdiction/country:us/state
 ocd-division/country:us/state:fl/place:tallahassee,ocd-jurisdiction/country:us/state:fl/place:tallahassee/government,"Tallahassee, FL"
 ocd-division/country:us/state:oh/place:akron,ocd-jurisdiction/country:us/state:oh/place:akron/government,"Akron, OH"
 ocd-division/country:us/state:in/place:bloomington,ocd-jurisdiction/country:us/state:in/place:bloomington/government,"Bloomington, IN"
-ocd-division/country:us/state:fl/place:bradenton,ocd-jurisdiction/country:us/state:fl/place:bradenton/government,"Bradenton, FL"
 ocd-division/country:us/state:ca/place:carlsbad,ocd-jurisdiction/country:us/state:ca/place:carlsbad/government,"Carlsbad, CA"
 ocd-division/country:us/state:nc/place:charlotte,ocd-jurisdiction/country:us/state:nc/place:charlotte/government,"Charlotte, NC"
 ocd-division/country:us/state:fl/place:clearwater,ocd-jurisdiction/country:us/state:fl/place:clearwater/government,"Clearwater, FL"

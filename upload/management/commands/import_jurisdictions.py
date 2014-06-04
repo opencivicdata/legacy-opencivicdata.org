@@ -9,9 +9,19 @@ class Command(BaseCommand):
     help = 'Load in Jurisdictions'
 
     def load_csv(self, file_):
+        seen = set()
+
         with open(file_, 'r') as fd:
             stream = csv.DictReader(fd)
             for entry in stream:
+                jurisdiction = entry['jurisdiction']
+                if jurisdiction in seen:
+                    raise ValueError(
+                        "Two of the same jurisdiction, likely bad data."
+                        + " Bad ID: '%s'" % (jurisdiction)
+                    )
+                seen.add(jurisdiction)
+
                 division = Division.objects.get(id=entry['division'])
                 try:
                     print(entry)
