@@ -184,7 +184,7 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
                 root = root.strip()
                 label = label.rstrip(")").strip()
 
-            root = root.strip()
+            root = root.strip().replace(" ", "")
             if root in ignore:
                 continue
 
