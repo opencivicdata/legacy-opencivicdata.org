@@ -28,7 +28,7 @@ WSGI_APPLICATION = 'data.wsgi.application'
 STATIC_ROOT = os.path.join(os.path.dirname(__file__), '../..', 'collected_static')
 STATIC_URL = '/media/'
 STATICFILES_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'media')),
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../', 'media')),
 )
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -71,8 +71,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'opencivicdata',
     'upload',
-    'home',
-    'sfapp',
+    'website',
 )
 
 # Sunlighauth bits. This requires that django-sunlightauth is installed.

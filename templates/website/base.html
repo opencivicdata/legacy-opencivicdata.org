@@ -17,7 +17,7 @@
 
         <title>{% block pagetitle %}Home{% endblock pagetitle %} | Open Civic Data</title>
 
-        {% include "includes/head.html" %}
+        {% include "website/includes/head.html" %}
         <script type="text/javascript" src="//use.typekit.com/tab6neo.js"></script>
         <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
         <link rel="stylesheet" href="{% static 'sfapp/css/bootstrap.min.css' %}">
@@ -29,7 +29,7 @@
     <body class="{{ page.bodyclass }}">
         <div class="sf-header">
             <div class="container">
-                {% include "includes/header.html" %}
+                {% include "website/includes/header.html" %}
             </div>
         </div>
 
@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-       {% include "includes/footer.html" %}
+       {% include "website/includes/footer.html" %}
         <script src="{% static 'sfapp/js/jquery.min.js' %}"></script>
         <script src="{% static 'sfapp/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'sfapp/js/sfapp.js' %}"></script>
