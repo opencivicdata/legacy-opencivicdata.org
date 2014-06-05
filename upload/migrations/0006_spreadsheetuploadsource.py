@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SpreadsheetUploadSource',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('upload', models.ForeignKey(to='upload.SpreadsheetUpload', to_field='id')),
                 ('url', models.TextField()),
                 ('note', models.TextField()),

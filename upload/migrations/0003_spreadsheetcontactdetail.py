@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SpreadsheetContactDetail',
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('person', models.ForeignKey(to='upload.SpreadsheetPerson', to_field='id')),
                 ('type', models.TextField()),
                 ('value', models.TextField()),
