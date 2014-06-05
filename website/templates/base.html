@@ -1,0 +1,93 @@
+<!doctype html>{% load staticfiles %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="The new Open Civic Data project brings your hometown online.">
+        <meta name="keywords" content="Open Civic Data, Open Civic Data Project">
+        <meta name="author" content="Sunlight Foundation">
+
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+        <meta property="og:title" content="Open Civic Data project" />
+        <meta property="og:url" content="http://opencivicdata.org" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="The new Open Civic Data project brings your hometown online. Learn how you can help." />
+        <meta property="og:image" content="{% static 'website/img/OpenCivicDatafb.png' %}" />
+        <meta property="fb:admins" content="7406790" />
+
+        <title>{% block pagetitle %}Home{% endblock pagetitle %} | Open Civic Data</title>
+
+        {% include "includes/head.html" %}
+        <script type="text/javascript" src="//use.typekit.com/tab6neo.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        <link rel="stylesheet" href="{% static 'sfapp/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'sfapp/css/sfapp.css' %}">
+        <link rel="stylesheet" href="{% static 'website/css/site.css' %}">
+        <link rel="icon" type="image/x-icon" href="{% static 'website/favicon.ico' %}" />
+
+    </head>
+    <body class="{{ page.bodyclass }}">
+        <div class="sf-header">
+            <div class="container">
+                {% include "includes/header.html" %}
+            </div>
+        </div>
+
+        <div class="container">
+            <header id="ocd-header" class="row">
+                <div class="col-xs-12 col-lg-5 col-lg-offset-1">
+                    <h1>
+                        <object class="logo img-responsive" data="{% static 'website/img/OpenCivicData-Logo-01.svg' %}" type="image/svg+xml">
+                          <!--[if lte IE 8]>
+                          <img xlink:href="{% static 'website/img/OpenCivicData-Logo-01.png' %}" src="{% static 'website/img/OpenCivicData-Logo-01.png' %}" width="544" height="202" alt="Open Civic Data">
+                          <![endif]-->
+                        </object>
+                        <span class="sr-only">The Open Civic Data Project</span>
+                    </h1>
+                </div>
+            </header>
+            <div id="sitenav" class="row">
+                <nav class="col-xs-12 col-lg-10 col-lg-offset-1">
+                    <ul class="nav nav-header">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about/">About Open Civic Data</a></li>
+                        <li><a href="/developers/">For Developers</a></li>
+                        <li><a href="/government/">For Governments</a></li>
+                        <li class="last"><a href="/contact/">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-8 social">
+                    <h6>share:</h6>
+                    <div class="share-buttons" data-socialite="auto" data-services="twitter-tweet, facebook-like"
+                         data-options="url=http%3A%2F%2Fopencivicdata.org"
+                         data-twitter-tweet-options="text=The%20new%20Open%20Civic%20Data%20project%20brings%20your%20hometown%20online.%20Learn%20how%20you%20can%20help:%20#opencivicdata"
+                         data-facebook-like-options="text=Open%20Civic%20Data.&amp;width=100&amp;layout=button_count"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+{% block content %}{% endblock content %}
+                </div>
+            </div>
+        </div>
+       {% include "includes/footer.html" %}
+        <script src="{% static 'sfapp/js/jquery.min.js' %}"></script>
+        <script src="{% static 'sfapp/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'sfapp/js/sfapp.js' %}"></script>
+        <script src="//assets.sunlightfoundation.com.s3.amazonaws.com/social/scripts/simple-socialite-pack.min.js"></script>
+{% if DEBUG %}
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', '{{ site.ga_key }}', 'opencivicdata.org');
+          ga('send', 'pageview');
+
+        </script>
+{% endif %}
+    </body>
+</html>

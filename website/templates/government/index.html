@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+    For Governments
+{% endblock pagetitle %}
+{% block content %}
+<h2>Governments</h2>
+
+<p class="intro">We built Open Civic Data to make it easier for you and your constituents to share information about local government online. Using Open Civic Data speeds integration of your data with local and national applications, making it possible for the first time to compare governments across the country. Open Civic Data empowers internet-scale tools to work in everyone's hometown.</p>
+
+<p><a href="/about/">Learn more about</a> why structured data improves legislative information.</p>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>What is Open Civic Data?</h3>
+    <p>Open Civic Data is a way to structure local legislative information that provides greater interoperability and searchability. Open Civic Data powers Google's Civic Information API with unique identifiers and was created by the expert team who created Open States.</p>
+    <p>Open Civic Data can work along side your local legislative systems or power new legislative software apps.</p>
+
+    <h3>Get Plugged In</h3>
+
+    <p><span class="h5">Not sure how to get started?</span> Read more about what legislative information can be plugged into Open Civic Data below or have your technical staff check out the Open Civic Data documentation.</p>
+
+    <p><span class="h5">Have Questions?</span> Contact <a href="mailto:local@sunlightfoundation.com">local [at] sunlightfoundation.com</a> today.</p>
+  </div>
+  <div class="col-md-5 col-md-offset-1 panel panel-highlight">
+    <h3>Open States</h3>
+    <p>Open States is a project created by the Sunlight Foundation that collects and publishes legislative information, from all 50 states, Puerto Rico, and D.C. This project inspired the work for the Open Civic Data project. The online Open States tool lets you:</p>
+    <ul>
+      <li>Find your legislators</li>
+      <li>Review their votes</li>
+      <li>Search upcoming legislation</li>
+      <li>Track bill progress</li>
+    </ul>
+    <p>The data collection and structure behind Open States also provides a powerful API that other apps can use, like the Sunlight Foundation's Scout app, which sends you an email every time there has been an action on a bill you are following. <a href="http://openstates.org/">Check it out</a> today!</p>
+  </div>
+</div>
+
+<h3>Types of Open Civic Data</h3>
+<p class="intro">The power behind the Open Civic Data model is that it can be applied to every type of local legislative process, despite the differences in legislative processes across the country.  Below are common elements across all city legislative processes distilled&mdash;the more you collect the more you can share and compare:</p>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4>People</h4>
+
+    <p>Open Civic Data captures information about <strong>people</strong> involved in the legislative process, such as representatives or public officials. This can cover names, positions, a photo, links, contact information, etc. of relevant city officials.</p>
+    <h4>Organizations</h4>
+
+    <p>Open Civic Data captures information about civic <strong>organizations</strong>, such as committees. Organization entities may specify names and identifiers, contact information, and the membership of the organization, along with other details.</p>
+    <h4>Votes</h4>
+
+    <p>Open Civic Data captures information about <strong>votes</strong>, such as who voted when and on what bill, plus additional details such as the type and sources of the vote information. Depending on the type of vote, vote counts and a list of individual legislators may be available.</p>
+
+  </div>
+  <div class="col-md-6">
+    <h4>Events</h4>
+
+    <p>Open Civic Data captures information about <strong>events</strong>, such as hearings and committee meetings. Events cover useful details such as start and and end times, location, and items on an agenda. Events in Open Civic Data can create a useful historical record, complete with related media when available.</p>
+
+    <h4>Bills</h4>
+
+    <p>Open Civic Data captures information about <strong>bills</strong> such as introduced ordinances. Bills in Open Civic Data can capture a wealth of information about a bill, including, but not limited to, bill name, session, chamber, summary, detailed sponsorship information, actions regarding the legislation (introduction date, committee referral, chamber crossover, etc), summaries and bill versions.</p>
+  </div>
+</div>
+{% endblock content %}
