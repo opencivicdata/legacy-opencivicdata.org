@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     'opencivicdata',
     'upload',
     'website',
+    'sfapp',
 )
 
 # Sunlighauth bits. This requires that django-sunlightauth is installed.
