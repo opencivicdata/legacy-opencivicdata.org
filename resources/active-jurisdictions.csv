@@ -6,7 +6,6 @@ ocd-division/country:us/state:sc/place:columbia,ocd-jurisdiction/country:us/stat
 ocd-division/country:us/state:mn/place:duluth,ocd-jurisdiction/country:us/state:mn/place:duluth/government,"Duluth, MN"
 ocd-division/country:us/state:in/place:fort_wayne,ocd-jurisdiction/country:us/state:in/place:fort_wayne/government,"Fort Wayne, IN"
 ocd-division/country:us/state:in/place:gary,ocd-jurisdiction/country:us/state:in/place:gary/government,"Gary, IN"
-ocd-division/country:us/state:mn/county:polk/place:grand_forks,ocd-jurisdiction/country:us/state:mn/county:polk/place:grand_forks/government,"Grand Forks, MN"
 ocd-division/country:us/state:ga/place:milledgeville,ocd-jurisdiction/country:us/state:ga/place:milledgeville/government,"Milledgeville, GA"
 ocd-division/country:us/state:sc/place:myrtle_beach,ocd-jurisdiction/country:us/state:sc/place:myrtle_beach/government,"Myrtle Beach, SC"
 ocd-division/country:us/state:fl/county:palm_beach,ocd-jurisdiction/country:us/state:fl/county:palm_beach/government,"Palm Beach, FL"
@@ -26,3 +25,4 @@ ocd-division/country:us/state:ca/place:palo_alto,ocd-jurisdiction/country:us/sta
 ocd-division/country:us/state:va/place:richmond,ocd-jurisdiction/country:us/state:va/place:richmond/government,"Richmond, VA"
 ocd-division/country:us/state:wi/place:whitewater,ocd-jurisdiction/country:us/state:wi/place:whitewater/government,"Whitewater, WI"
 ocd-division/country:us/state:ks/county:wichita,ocd-jurisdiction/country:us/state:ks/county:wichita/government,"Wichita, KS"
+ocd-division/country:us/state:nd/place:grand_forks,ocd-jurisdiction/country:us/state:nd/place:grand_forks,"Grand Forks, ND"
