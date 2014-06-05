@@ -7,6 +7,11 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
+ADMINS = (
+    ('Paul Tagliamonte', 'paultag@sunlightfoundation.com'),
+)
+
+
 FILE_UPLOAD_HANDLERS = (
     "django.core.files.uploadhandler.MemoryFileUploadHandler",
     "django.core.files.uploadhandler.TemporaryFileUploadHandler",

@@ -3,9 +3,31 @@
 {% block content %}
 
 <h1>{{exception}}</h1>
-<pre>{{exception}}</pre>
 
-Check out the <a href="{% url "spreadsheet_guide" %}" >Spreadsheet Guide</a> for
-a guide on how to author spreadsheet files.
+<p>
+During the processing of the upload, the backend encountered a problem
+processing the sheet. Sorry about that.
+</p>
+
+<br />
+
+<p>
+If you're having issues, or are unsure how to resolve this problem,
+there are some helpful pointers in the
+<a href="{% url "spreadsheet_guide" %}" >Spreadsheet Guide</a>, or
+contact one of the service maintainers listed below:
+<ul>
+{% for admin, email in admins %}
+    <li><a href="mailto:{{email}}" >{{admin}}</a></li>
+{% endfor %}
+</ul>
+</p>
+
+<br />
+<br />
+
+<p>
+<pre>{{exception}}</pre>
+</p>
 
 {% endblock %}
