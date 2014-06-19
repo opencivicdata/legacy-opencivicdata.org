@@ -25,4 +25,4 @@ ocd-division/country:us/state:ca/place:palo_alto,ocd-jurisdiction/country:us/sta
 ocd-division/country:us/state:va/place:richmond,ocd-jurisdiction/country:us/state:va/place:richmond/government,"Richmond, VA"
 ocd-division/country:us/state:wi/place:whitewater,ocd-jurisdiction/country:us/state:wi/place:whitewater/government,"Whitewater, WI"
 ocd-division/country:us/state:ks/county:wichita,ocd-jurisdiction/country:us/state:ks/county:wichita/government,"Wichita, KS"
-ocd-division/country:us/state:nd/place:grand_forks,ocd-jurisdiction/country:us/state:nd/place:grand_forks,"Grand Forks, ND"
+ocd-division/country:us/state:nd/place:grand_forks,ocd-jurisdiction/country:us/state:nd/place:grand_forks/government,"Grand Forks, ND"
