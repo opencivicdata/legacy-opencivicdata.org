@@ -9,3 +9,4 @@ django-uuidfield
 python-social-auth
 -e git://github.com/sunlightlabs/django-sunlightauth.git@paultag/bugfix/socialauth#egg=sunlightauth
 xlrd
+dj-static

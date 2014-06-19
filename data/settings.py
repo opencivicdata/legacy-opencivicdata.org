@@ -30,8 +30,11 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'data.urls'
 WSGI_APPLICATION = 'data.wsgi.application'
 
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), '../..', 'collected_static')
-STATIC_URL = '/media/'
+# STATIC_ROOT = os.path.join(os.path.dirname(__file__), '../..', 'collected_static')
+# STATIC_URL = '/media/'
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
 STATICFILES_DIRS = (
     os.path.abspath(os.path.join(os.path.dirname(__file__), '../', 'media')),
 )
