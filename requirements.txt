@@ -1,12 +1,19 @@
--e git://github.com/sunlightlabs/sfapp.git#egg=sfapp
+https://www.djangoproject.com/download/1.7.b4/tarball/
+# Django 1.7. Change this once it's released.
+
 -e git://github.com/opencivicdata/pupa.git#egg=pupa
 -e git://github.com/opencivicdata/python-opencivicdata.git#egg=opencivicdata
-https://www.djangoproject.com/download/1.7.b4/tarball/
+xlrd
+# import stuff.
+
+-e git://github.com/kennethreitz/dj-static.git#egg=dj_static
+-e git://github.com/sunlightlabs/sfapp.git#egg=sfapp
+python-social-auth
+-e git://github.com/sunlightlabs/django-sunlightauth.git@paultag/bugfix/socialauth#egg=sunlightauth
+# deployment / sunlight goodies
+
 psycopg2
 djorm-ext-pgarray
 jsonfield
 django-uuidfield
-python-social-auth
--e git://github.com/sunlightlabs/django-sunlightauth.git@paultag/bugfix/socialauth#egg=sunlightauth
-xlrd
--e git://github.com/kennethreitz/dj-static.git#egg=dj_static
+# Database stuff
