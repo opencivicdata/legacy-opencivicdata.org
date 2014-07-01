@@ -45,7 +45,8 @@ def upload(request):
     except Jurisdiction.DoesNotExist as e:
         return render(request, "data/upload/public/upload_fail.html", {
             "exception": e,
-            "jurisdiction": request.POST['jurisdiction']
+            "jurisdiction": request.POST['jurisdiction'],
+            "admins": settings.ADMINS,
         })
 
     sheet = request.FILES['sheet']
@@ -70,7 +71,8 @@ def upload(request):
     except ValueError as e:
         return render(request, "data/upload/public/upload_fail.html", {
             "exception": e,
-            "jurisdiction": request.POST['jurisdiction']
+            "jurisdiction": request.POST['jurisdiction'],
+            "admins": settings.ADMINS,
         })
 
     return redirect('manage', transaction.id)
@@ -112,6 +114,7 @@ def migrate(request):
     if not transaction.is_actionable():
         return render(request, "data/upload/public/migrate_fail.html", {
             "transaction": transaction,
+            "admins": settings.ADMINS,
         })
 
     if reject:
