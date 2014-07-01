@@ -37,35 +37,31 @@
             <header id="ocd-header" class="row">
                 <div class="col-xs-12 col-lg-5 col-lg-offset-1">
                     <h1>
-                        <object class="logo img-responsive" data="{% static 'website/img/OpenCivicData-Logo-01.svg' %}" type="image/svg+xml">
-                          <!--[if lte IE 8]>
-                          <img xlink:href="{% static 'website/img/OpenCivicData-Logo-01.png' %}" src="{% static 'website/img/OpenCivicData-Logo-01.png' %}" width="544" height="202" alt="Open Civic Data">
-                          <![endif]-->
-                        </object>
-                        <span class="sr-only">The Open Civic Data Project</span>
+                        <a href="/" class="home">
+
+                            <object class="logo img-responsive" data="{% static 'website/img/OpenCivicData-Logo-01.svg' %}" type="image/svg+xml">
+                              <!--[if lte IE 8]>
+                              <img xlink:href="{% static 'website/img/OpenCivicData-Logo-01.png' %}" src="{% static 'website/img/OpenCivicData-Logo-01.png' %}" width="544" height="202" alt="Open Civic Data">
+                              <![endif]-->
+                            </object>
+                            <span class="sr-only">The Open Civic Data Project</span>
+                        </a>
                     </h1>
                 </div>
-            </header>
-            <div id="sitenav" class="row">
-                <nav class="col-xs-12 col-lg-10 col-lg-offset-1">
+
+            <div id="sitenav">
+                <nav >
                     <ul class="nav nav-header">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about/">About Open Civic Data</a></li>
+                        <!--<li><a href="/">Home</a></li> -->
+                        <li><a href="/about/">About</a></li>
                         <li><a href="/developers/">For Developers</a></li>
                         <li><a href="/government/">For Governments</a></li>
                         <li class="last"><a href="/contact/">Contact</a></li>
                     </ul>
                 </nav>
             </div>
-            <div class="row">
-                <div class="col-sm-3 col-sm-offset-8 social">
-                    <h6>share:</h6>
-                    <div class="share-buttons" data-socialite="auto" data-services="twitter-tweet, facebook-like"
-                         data-options="url=http%3A%2F%2Fopencivicdata.org"
-                         data-twitter-tweet-options="text=The%20new%20Open%20Civic%20Data%20project%20brings%20your%20hometown%20online.%20Learn%20how%20you%20can%20help:%20#opencivicdata"
-                         data-facebook-like-options="text=Open%20Civic%20Data.&amp;width=100&amp;layout=button_count"></div>
-                </div>
-            </div>
+                        </header>
+
             <div class="row">
                 <div class="col-xs-12 col-lg-10 col-lg-offset-1">
 {% block content %}{% endblock content %}
