@@ -1,5 +1,5 @@
 <!doctype html>{% load staticfiles %}
-<html>
+<html class="bb_wrapper">
     <head>
         <meta charset="utf-8">
         <meta name="description" content="The new Open Civic Data project brings your hometown online.">
@@ -23,15 +23,30 @@
         <link rel="stylesheet" href="{% static 'sfapp/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'sfapp/css/sfapp.css' %}">
         <link rel="stylesheet" href="{% static 'website/css/site.css' %}">
+
         <link rel="icon" type="image/x-icon" href="{% static 'website/favicon.ico' %}" />
+
+        {% comment %}
+
+        === BRANDING BAR ===
+
+        https://github.com/sunlightlabs/branding-bar
+
+        In the future, if we need to update the branding bar, update the string
+        after this comment to the current version found in the 'from CDN'
+        section of the README. This will update the two headers below,
+        and closes over the entire page down to the JavaScript tag below
+        the content.
+
+        {% endcomment %}
+
+        {% with "0.3" as branding_version %}
+        <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/brandingbar/{{branding_version}}/css/brandingbar.css">
+        <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/sf-icons/0.2/css/sf-icons.css">
 
     </head>
     <body class="{{ page.bodyclass }}">
-        <div class="sf-header">
-            <div class="container">
-                {% include "website/includes/header.html" %}
-            </div>
-        </div>
+        {% include "website/includes/header.html" %}
 
         <div class="container">
             <header id="ocd-header" class="row">
@@ -85,5 +100,7 @@
 
         </script>
 {% endif %}
+        <script src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/{{branding_version}}/js/brandingbar.min.js.gz"></script>
+        {% endwith %}
     </body>
 </html>
