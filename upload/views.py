@@ -13,6 +13,7 @@ from opencivicdata.models import Jurisdiction
 import json
 
 
+@login_required
 def home(request):
     if request.method == 'POST':
         form = SpreadsheetUploadForm(request.POST, request.FILES)
@@ -39,6 +40,7 @@ def home(request):
 
 
 @require_http_methods(["POST"])
+@login_required
 def upload(request):
     try:
         jurisdiction = Jurisdiction.objects.get(id=request.POST['jurisdiction'])
