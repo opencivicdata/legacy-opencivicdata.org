@@ -1,0 +1,22 @@
+{% extends "website/ocd_base.html" %}
+{% load staticfiles %}
+
+{% comment %}
+    This is a minimal base template, which contains nothing except core
+    styling. There's no nav menu and no header.
+
+    Often times you really want 'website/base.html'.
+
+        - PRT
+{% endcomment %}
+
+{% block ocd_pagetitle %}{% block pagetitle %}Home{% endblock pagetitle %}{% endblock ocd_pagetitle %}
+
+{% block ocd_content %}
+            <div class="row">
+                <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+{% block content %}
+{% endblock content %}
+                </div>
+            </div>
+{% endblock ocd_content %}
