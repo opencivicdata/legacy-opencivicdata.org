@@ -28,10 +28,16 @@
 
     <script>
     $(document).ready(function() {
+        var s2j = ('<input type="hidden" class="bigdrop" '
+                   + 'name="jurisdiction" id="id_jurisdiction" '
+                   + 'style="width:600px" />');
+
         function jurisdictionFormatResult(data) {return data.name + " (" + data.id + ")";}
         function jurisdictionFormatSelection(data) {return data.id;}
 
-        $("#jurisdiction").select2({
+        $("#id_jurisdiction").replaceWith(s2j);
+
+        $("#id_jurisdiction").select2({
             placeholder: "Search for a jurisdiction",
             quietMillis: 100,
             minimumInputLength: 3,
