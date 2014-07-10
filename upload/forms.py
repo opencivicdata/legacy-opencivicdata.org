@@ -9,12 +9,12 @@ from django import forms
 
 class Select2Widget(widgets.TextInput):
     def render(self, name, value, attrs=None):
-        return mark_safe(get_template(
-            'data/upload/forms/select2.html'
-        ).render(Context({
-            "name": name,
-            "value": value,
-        })))
+        return mark_safe("""
+                         <input type="hidden"
+                                class="bigdrop"
+                                name="{}" id="{}"
+                                style="width:600px" />
+                         """.format(name, name))
 
 
 class JurisdictionModelChoiceField(forms.ModelChoiceField):
