@@ -1,1 +1,10 @@
 {% extends "website/bare.html" %}
+{% load staticfiles %}
+
+{% block ocd_scripts %}
+    <link rel="stylesheet" href="{% static 'upload/select2/select2-bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'upload/select2/select2.css' %}">
+
+    <script type='application/javascript' src="{% static 'upload/jquery/jquery-2.1.1.min.js' %}"></script>
+    <script type='application/javascript' src="{% static 'upload/select2/select2.js' %}"></script>
+{% endblock %}

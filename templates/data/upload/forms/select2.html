@@ -1,0 +1,32 @@
+<input type="hidden" class="ajax bigdrop" id="id_{{name}}" style="width:600px" />
+
+<script>
+$(document).ready(function() {
+    function jurisdictionFormatResult(data) {
+        return data.name + " (" + data.id + ")";
+    }
+
+    $("#id_{{name}}").select2({
+        placeholder: "Search for a jurisdiction",
+        minimumInputLength: 3,
+        ajax: {
+            url: "http://localhost:8080/jurisdictions/",
+            dataType: 'jsonp',
+            data: function (term, page) {
+                return {
+                    name: term,
+                };
+            },
+            results: function (data, page) {
+            console.log(data);
+                return {
+                    results: data.results
+                };
+            }
+        },
+        formatResult: jurisdictionFormatResult,
+        dropdownCssClass: "bigdrop",
+        escapeMarkup: function (m) { return m; },
+    });
+});
+</script>
