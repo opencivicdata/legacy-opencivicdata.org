@@ -1,4 +1,4 @@
-<input type="hidden" class="ajax bigdrop" id="id_{{name}}" style="width:600px" />
+<input type="hidden" class="bigdrop" name="{{name}}" id="{{name}}" style="width:600px" />
 
 <script>
 $(document).ready(function() {
@@ -6,8 +6,13 @@ $(document).ready(function() {
         return data.name + " (" + data.id + ")";
     }
 
-    $("#id_{{name}}").select2({
+    function jurisdictionFormatSelection(data) {
+        return data.id;
+    }
+
+    $("#{{name}}").select2({
         placeholder: "Search for a jurisdiction",
+        quietMillis: 100,
         minimumInputLength: 3,
         ajax: {
             url: "http://localhost:8080/jurisdictions/",
@@ -25,6 +30,7 @@ $(document).ready(function() {
             }
         },
         formatResult: jurisdictionFormatResult,
+        formatSelection: jurisdictionFormatSelection,
         dropdownCssClass: "bigdrop",
         escapeMarkup: function (m) { return m; },
     });
