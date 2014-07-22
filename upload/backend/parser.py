@@ -40,6 +40,8 @@ def people_to_pupa(stream, transaction):
             org.add_post(label=position, role=position)
             continue
 
+        start_date, end_date = person.start_date, person.end_date
+
         if position is None:
             position = "member"
 
@@ -53,10 +55,17 @@ def people_to_pupa(stream, transaction):
                 organization=org,
                 label=person.position,
                 role=person.position,
+                start_date=start_date,
+                end_date=end_date,
             )
             org.add_post(label=position, role=position)
         else:
-            obj = Legislator(name=name, district=district)
+            obj = Legislator(
+                name=name,
+                district=district,
+                start_date=start_date,
+                end_date=end_date
+            )
             org.add_post(label=district, role=position)
             if person.party:
                 obj._party = person.party
@@ -141,6 +150,12 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
             position=position,
             district=district,
         )
+
+        if 'start date' in person:
+            who.start_date = person.pop('start date')
+
+        if 'end date' in person:
+            who.end_date = person.pop('end date')
 
         if 'photo' in person:
             who.image = person.pop("photo")
