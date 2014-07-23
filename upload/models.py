@@ -29,6 +29,8 @@ class SpreadsheetPerson(models.Model):
     party = models.TextField(blank=True)
     position = models.TextField()
     district = models.TextField()
+    start_date = models.DateField(null=True)
+    end_date = models.DateField(null=True)
     spreadsheet = models.ForeignKey(SpreadsheetUpload, related_name='people')
     code = models.TextField()
     # HStore here.

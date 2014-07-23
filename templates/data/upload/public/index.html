@@ -42,7 +42,7 @@
             quietMillis: 100,
             minimumInputLength: 3,
             ajax: {
-                url: "http://localhost:8080/jurisdictions/",
+                url: "{{OCD_API_HOST}}/jurisdictions/",
                 dataType: 'json',
                 data: function (term, page) {
                     return {

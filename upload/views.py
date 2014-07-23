@@ -29,6 +29,7 @@ def home(request):
     return render(request, 'data/upload/public/index.html', {
         "form": form,
         "user": user,
+        "OCD_API_HOST": settings.OCD_API_HOST
     })
 
 
