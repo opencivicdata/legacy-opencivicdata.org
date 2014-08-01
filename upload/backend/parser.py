@@ -8,8 +8,7 @@ from ..models import (SpreadsheetUpload, SpreadsheetPerson,
 
 from collections import defaultdict
 from contextlib import contextmanager
-from pupa.scrape.helpers import Legislator, Person
-from pupa.scrape.popolo import Organization
+from pupa.scrape.popolo import Organization, Person
 
 
 def people_to_pupa(stream, transaction):
@@ -40,7 +39,8 @@ def people_to_pupa(stream, transaction):
             org.add_post(label=position, role=position)
             continue
 
-        start_date, end_date = person.start_date, person.end_date
+        start_date, end_date = (x if x else ""
+                                for x in (person.start_date, person.end_date))
 
         if position is None:
             position = "member"
@@ -60,8 +60,9 @@ def people_to_pupa(stream, transaction):
             )
             org.add_post(label=position, role=position)
         else:
-            obj = Legislator(
+            obj = Person(
                 name=name,
+                primary_org="legislature",
                 district=district,
                 start_date=start_date,
                 end_date=end_date
