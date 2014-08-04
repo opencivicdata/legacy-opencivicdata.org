@@ -152,6 +152,12 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
             district=district,
         )
 
+        if 'first name' in person:
+            who.given_name = person.pop('first name')
+
+        if 'last name' in person:
+            who.family_name = person.pop('last name')
+
         if 'start date' in person:
             who.start_date = person.pop('start date')
 
