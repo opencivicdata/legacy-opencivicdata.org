@@ -70,6 +70,11 @@ def people_to_pupa(stream, transaction):
         else:
             if name in people:
                 obj = people[name]
+                obj.add_membership(organization=org,
+                                   label=person.position,
+                                   role=person.position,
+                                   start_date=start_date,
+                                   end_date=end_date)
             else:
                 obj = Person(
                     name=name,
