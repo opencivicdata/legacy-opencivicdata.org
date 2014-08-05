@@ -1,6 +1,7 @@
 from pupa.scrape import (Jurisdiction, Person, Organization, Membership, Post)
 from pupa.importers import (OrganizationImporter, PersonImporter, PostImporter,
                             MembershipImporter)
+from django.db import transaction
 
 
 def do_import(stream, transaction):
@@ -25,12 +26,11 @@ def do_import(stream, transaction):
         for el in filter(lambda x: isinstance(x, otype), stream):
             yield el.as_dict()
 
-
-    report.update(org_importer.import_data(tfilter(Organization, stream)))
-    report.update(person_importer.import_data(tfilter(Person, stream)))
-    report.update(post_importer.import_data(tfilter(Post, stream)))
-
-    report.update(membership_importer.import_data(
-        tfilter(Membership, stream)))
+    with transaction.atomic():
+        report.update(org_importer.import_data(tfilter(Organization, stream)))
+        report.update(person_importer.import_data(tfilter(Person, stream)))
+        report.update(post_importer.import_data(tfilter(Post, stream)))
+        report.update(membership_importer.import_data(
+            tfilter(Membership, stream)))
 
     return report
