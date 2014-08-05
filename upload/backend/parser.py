@@ -22,12 +22,20 @@ def people_to_pupa(stream, transaction):
 
     parties = defaultdict(list)
     posts = {}
+    seen = set()
 
     for person in stream:
         name = person.name
         position = person.position
         district = person.district
         image = person.image
+
+        pk = (name, position, district)
+        if pk in seen:
+            print("Skipping: %s/%s/%s" % (name, position, district))
+            continue
+
+        seen.add(pk)
 
         if not name:
             raise ValueError("A name is required for each entry.")
