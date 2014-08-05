@@ -4,9 +4,9 @@ from pupa.importers import (OrganizationImporter, PersonImporter, PostImporter,
 from django.db import transaction
 
 
-def do_import(stream, transaction):
+def do_import(stream, stransaction):
     stream = list(stream)
-    jurisdiction_id = transaction.jurisdiction.id
+    jurisdiction_id = stransaction.jurisdiction.id
 
     org_importer = OrganizationImporter(jurisdiction_id)
     person_importer = PersonImporter(jurisdiction_id)
@@ -19,8 +19,6 @@ def do_import(stream, transaction):
     )
 
     report = {}
-    # This basically relates to Pupa's pupa.clu.commands.update:113
-    # (From there - wrap this in a transaction.)
 
     def tfilter(otype, stream):
         for el in filter(lambda x: isinstance(x, otype), stream):
