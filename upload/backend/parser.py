@@ -21,6 +21,7 @@ def people_to_pupa(stream, transaction):
         org.add_source(url=source.url, note=source.note)
 
     parties = defaultdict(list)
+    posts = {}
 
     for person in stream:
         name = person.name
@@ -36,7 +37,7 @@ def people_to_pupa(stream, transaction):
             # attached to it, for vacant seats. Since all that we do
             # below is create the Person, we can get away with just creating
             # the post, without actually filling out the person.
-            org.add_post(label=position, role=position)
+            posts[position] = org
             continue
 
         start_date, end_date = (x if x else ""
@@ -58,7 +59,7 @@ def people_to_pupa(stream, transaction):
                 start_date=start_date,
                 end_date=end_date,
             )
-            org.add_post(label=position, role=position)
+            posts[position] = org
         else:
             obj = Person(
                 name=name,
@@ -67,10 +68,13 @@ def people_to_pupa(stream, transaction):
                 start_date=start_date,
                 end_date=end_date
             )
-            org.add_post(label=district, role=position)
+            posts[district] = org
             if person.party:
                 obj._party = person.party
                 parties[person.party].append(person.sources.all())
+
+        for post, org in posts.items():
+            org.add_post(label=post, role=post)
 
         if image:
             obj.image = image
