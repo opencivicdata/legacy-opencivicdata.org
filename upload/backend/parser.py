@@ -46,8 +46,15 @@ def people_to_pupa(stream, transaction):
         if position is None:
             position = "member"
 
+        people = {}
+
         if not district:
-            obj = Person(name=name)
+            if name in people:
+                obj = people[name]
+            else:
+                obj = Person(name=name)
+                people[name] = obj
+
             # OK. Let's manually create the relation without the district.
             # (If they don't have a district, it's assumed they're a member
             #  of the org, but not a "legislator". Something like Mayor, where
@@ -61,13 +68,17 @@ def people_to_pupa(stream, transaction):
             )
             posts[position] = org
         else:
-            obj = Person(
-                name=name,
-                primary_org="legislature",
-                district=district,
-                start_date=start_date,
-                end_date=end_date
-            )
+            if name in people:
+                obj = people[name]
+            else:
+                obj = Person(
+                    name=name,
+                    primary_org="legislature",
+                    district=district,
+                    start_date=start_date,
+                    end_date=end_date
+                )
+                people[name] = obj
             posts[district] = org
             if person.party:
                 obj._party = person.party
