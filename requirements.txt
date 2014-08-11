@@ -1,9 +1,9 @@
 # Django 1.7 rc1 Change this once it's released.
-https://www.djangoproject.com/download/1.7c1/tarball/
+https://www.djangoproject.com/download/1.7c2/tarball/
 
 
 -e git://github.com/opencivicdata/pupa.git#egg=pupa
--e git://github.com/opencivicdata/python-opencivicdata.git#egg=opencivicdata
+-e git://github.com/opencivicdata/python-opencivicdata-django.git#egg=opencivicdata-django
 xlrd
 # import stuff.
 
