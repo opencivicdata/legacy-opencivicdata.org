@@ -64,6 +64,26 @@ This data was uploaded by a user that wasn't logged in.
 </table>
 <br />
 <br />
+{% if person.start_date or person.end_date %}
+<table>
+    <tr>
+        <td><b>Role Start Date</b></td>
+    {% if person.start_date %}
+        <td>{{person.start_date}}</dt>
+    {% endif %}
+    </tr>
+
+    <tr>
+    {% if person.end_date %}
+        <td><b>Role End Date</b></td>
+        <td>{{person.end_date}}</td>
+    {% endif %}
+    </tr>
+</table>
+{% endif %}
+
+<br />
+<br />
 <table>
     <tr>
         <th>What</th>

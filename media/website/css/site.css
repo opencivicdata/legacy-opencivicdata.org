@@ -241,10 +241,16 @@ li p {
     margin-top:75px;
 }
 
+/*
+ * XXX: Removed Jul 9th. Conflicts with branding bar icons. I can't see
+ * that it's used elsewhere.
+ *    - PRT
+
 .social {
     float: right;
 
 }
+*/
 
 .social h6 {
     float:left;

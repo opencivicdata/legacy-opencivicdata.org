@@ -8,8 +8,7 @@ from ..models import (SpreadsheetUpload, SpreadsheetPerson,
 
 from collections import defaultdict
 from contextlib import contextmanager
-from pupa.scrape.helpers import Legislator, Person
-from pupa.scrape.popolo import Organization
+from pupa.scrape.popolo import Organization, Person
 
 
 def people_to_pupa(stream, transaction):
@@ -22,12 +21,21 @@ def people_to_pupa(stream, transaction):
         org.add_source(url=source.url, note=source.note)
 
     parties = defaultdict(list)
+    posts = {}
+    seen = set()
 
     for person in stream:
         name = person.name
         position = person.position
         district = person.district
         image = person.image
+
+        pk = (name, position, district)
+        if pk in seen:
+            print("Skipping: %s/%s/%s" % (name, position, district))
+            continue
+
+        seen.add(pk)
 
         if not name:
             raise ValueError("A name is required for each entry.")
@@ -37,14 +45,24 @@ def people_to_pupa(stream, transaction):
             # attached to it, for vacant seats. Since all that we do
             # below is create the Person, we can get away with just creating
             # the post, without actually filling out the person.
-            org.add_post(label=position, role=position)
+            posts[position] = org
             continue
+
+        start_date, end_date = (x if x else ""
+                                for x in (person.start_date, person.end_date))
 
         if position is None:
             position = "member"
 
+        people = {}
+
         if not district:
-            obj = Person(name=name)
+            if name in people:
+                obj = people[name]
+            else:
+                obj = Person(name=name)
+                people[name] = obj
+
             # OK. Let's manually create the relation without the district.
             # (If they don't have a district, it's assumed they're a member
             #  of the org, but not a "legislator". Something like Mayor, where
@@ -53,14 +71,34 @@ def people_to_pupa(stream, transaction):
                 organization=org,
                 label=person.position,
                 role=person.position,
+                start_date=start_date,
+                end_date=end_date,
             )
-            org.add_post(label=position, role=position)
+            posts[position] = org
         else:
-            obj = Legislator(name=name, district=district)
-            org.add_post(label=district, role=position)
+            if name in people:
+                obj = people[name]
+                obj.add_membership(organization=org,
+                                   label=person.position,
+                                   role=person.position,
+                                   start_date=start_date,
+                                   end_date=end_date)
+            else:
+                obj = Person(
+                    name=name,
+                    primary_org="legislature",
+                    district=district,
+                    start_date=start_date,
+                    end_date=end_date
+                )
+                people[name] = obj
+            posts[district] = org
             if person.party:
                 obj._party = person.party
                 parties[person.party].append(person.sources.all())
+
+        for post, org in posts.items():
+            org.add_post(label=post, role=post)
 
         if image:
             obj.image = image
@@ -141,6 +179,21 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
             position=position,
             district=district,
         )
+
+        if 'first name' in person:
+            who.given_name = person.pop('first name')
+
+        if 'last name' in person:
+            who.family_name = person.pop('last name')
+
+        if 'middle name' in person:
+            who.additional_name = person.pop('middle name')
+
+        if 'start date' in person:
+            who.start_date = person.pop('start date')
+
+        if 'end date' in person:
+            who.end_date = person.pop('end date')
 
         if 'photo' in person:
             who.image = person.pop("photo")

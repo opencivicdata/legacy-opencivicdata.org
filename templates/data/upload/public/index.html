@@ -19,8 +19,48 @@
     <h1>Upload new data</h1>
 
     <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
+        <table>
+            {% csrf_token %}
+            {{ form.as_table }}
+        </table>
         <input type="submit" value="submit" />
     </form>
+
+    <script>
+    $(document).ready(function() {
+        var s2j = ('<input type="hidden" class="bigdrop" '
+                   + 'name="jurisdiction" id="id_jurisdiction" '
+                   + 'style="width:600px" />');
+
+        function jurisdictionFormatResult(data) {return data.name + " (" + data.id + ")";}
+        function jurisdictionFormatSelection(data) {return data.id;}
+
+        $("#id_jurisdiction").replaceWith(s2j);
+
+        $("#id_jurisdiction").select2({
+            placeholder: "Search for a jurisdiction",
+            quietMillis: 100,
+            minimumInputLength: 3,
+            ajax: {
+                url: "{{OCD_API_HOST}}/jurisdictions/",
+                dataType: 'json',
+                data: function (term, page) {
+                    return {
+                        name: term,
+                    };
+                },
+                results: function (data, page) {
+                console.log(data);
+                    return {
+                        results: data.results
+                    };
+                }
+            },
+            formatResult: jurisdictionFormatResult,
+            formatSelection: jurisdictionFormatSelection,
+            dropdownCssClass: "bigdrop",
+            escapeMarkup: function (m) { return m; },
+        });
+    });
+    </script>
 {% endblock %}

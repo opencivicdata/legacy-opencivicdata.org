@@ -1,0 +1,91 @@
+<!doctype html>{% load staticfiles %}
+<html class="bb_wrapper">
+
+{% comment %}
+      This file is the OCD Base template. This was called 'base' in the past,
+      but because we have two 'base' templates (with and without the big
+      branding and navmenu), this got split out into two places -- bare and
+      base. 'base' has the same behavior as before, but 'bare' is the 'base'
+      template without any additional headers. Absolutely minimal.
+
+      This defines 'ocd_pagetitle' and 'ocd_content', both of which are
+      tweakable in the downstream templates.
+
+      Refer to 'website/base.html' and 'website/bare.html' for each.
+
+        - PRT
+{% endcomment %}
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="The new Open Civic Data project brings your hometown online.">
+        <meta name="keywords" content="Open Civic Data, Open Civic Data Project">
+        <meta name="author" content="Sunlight Foundation">
+
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+        <meta property="og:title" content="Open Civic Data project" />
+        <meta property="og:url" content="http://opencivicdata.org" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="The new Open Civic Data project brings your hometown online. Learn how you can help." />
+        <meta property="og:image" content="{% static 'website/img/OpenCivicDatafb.png' %}" />
+        <meta property="fb:admins" content="7406790" />
+
+        <title>{% block ocd_pagetitle %}Home{% endblock ocd_pagetitle %} | Open Civic Data</title>
+
+        {% include "website/includes/head.html" %}
+        <script type="text/javascript" src="//use.typekit.com/tab6neo.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        <link rel="stylesheet" href="{% static 'sfapp/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'sfapp/css/sfapp.css' %}">
+        <link rel="stylesheet" href="{% static 'website/css/site.css' %}">
+        {% block ocd_scripts %}
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{% static 'website/favicon.ico' %}" />
+
+        {% comment %}
+
+        === BRANDING BAR ===
+
+        https://github.com/sunlightlabs/branding-bar
+
+        In the future, if we need to update the branding bar, update the string
+        after this comment to the current version found in the 'from CDN'
+        section of the README. This will update the two headers below,
+        and closes over the entire page down to the JavaScript tag below
+        the content.
+
+        {% endcomment %}
+
+        {% with "0.3" as branding_version %}
+        <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/brandingbar/{{branding_version}}/css/brandingbar.css">
+        <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/sf-icons/0.2/css/sf-icons.css">
+
+    </head>
+    <body class="{{ page.bodyclass }}">
+        {% include "website/includes/header.html" %}
+
+        <div class="container">
+{% block ocd_content %}
+{% endblock ocd_content %}
+        </div>
+       {% include "website/includes/footer.html" %}
+{% block ocd_footer_scripts %}
+{% endblock %}
+{% if DEBUG %}
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', '{{ site.ga_key }}', 'opencivicdata.org');
+          ga('send', 'pageview');
+
+        </script>
+{% endif %}
+        <script src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/{{branding_version}}/js/brandingbar.min.js.gz"></script>
+        {% endwith %}
+    </body>
+</html>
