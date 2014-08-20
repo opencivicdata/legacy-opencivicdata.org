@@ -77,7 +77,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
-    'opencivicdata',
+    'opencivicdata.apps.BaseConfig',
     'upload',
     'website',
     'sfapp',
@@ -87,6 +87,7 @@ INSTALLED_APPS = (
 
 AUTHENTICATION_BACKENDS = (
     'sunlightauth.backends.SunlightBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 # SOCIAL_AUTH_SUNLIGHT_KEY = 'SET IN DJANGO LOCAL SETTINGS'
