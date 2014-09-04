@@ -23,22 +23,10 @@ def people_to_pupa(stream, transaction):
 
     parties = defaultdict(list)
     posts = {}
-    seen = set()
 
     for person in stream:
         name = person.name
-        position = person.position
-        district = person.district
         image = person.image
-
-        print(district)
-
-        pk = (name, position, district)
-        if pk in seen:
-            print("Skipping: %s/%s/%s" % (name, position, district))
-            continue
-
-        seen.add(pk)
 
         if not name:
             raise ValueError("A name is required for each entry.")
@@ -54,51 +42,30 @@ def people_to_pupa(stream, transaction):
         start_date, end_date = (x if x else ""
                                 for x in (person.start_date, person.end_date))
 
-        if position is None:
-            position = "member"
-
         people = {}
 
-        if not district:
-            if name in people:
-                obj = people[name]
-            else:
-                obj = Person(name=name)
-                people[name] = obj
+        if name in people:
+            obj = people[name]
+        else:
+            obj = Person(name=name)
+            people[name] = obj
 
-            # OK. Let's manually create the relation without the district.
-            # (If they don't have a district, it's assumed they're a member
-            #  of the org, but not a "legislator". Something like Mayor, where
-            #  they hold membership, but not a district).
+        for membership in person.memberships.all():
+            role = membership.role   # TOWN OF FOO CLERK (F00)
+            district = membership.district   # Town of Foo
+
             obj.add_membership(
                 organization=org,
-                label=person.position,
-                role=person.position,
+                label=role,
+                role=role,
                 start_date=start_date,
                 end_date=end_date,
             )
-            posts[position] = org
-        else:
-            if name in people:
-                obj = people[name]
-                obj.add_membership(organization=org,
-                                   label=person.position,
-                                   role=person.position,
-                                   start_date=start_date,
-                                   end_date=end_date)
-            else:
-                obj = Person(
-                    name=name,
-                    primary_org="legislature",
-                    district=district,
-                    start_date=start_date,
-                    end_date=end_date
-                )
-                people[name] = obj
-            posts[district] = org
-            if person.party:
-                obj._party = person.party
-                parties[person.party].append(person.sources.all())
+            posts[role] = org
+
+        if person.party:
+            obj._party = person.party
+            parties[person.party].append(person.sources.all())
 
         for post, org in posts.items():
             org.add_post(label=post, role=post)
