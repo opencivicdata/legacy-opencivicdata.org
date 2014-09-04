@@ -9,7 +9,7 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('opencivicdata', '0001_initial'),
+        ('opencivicdata', '0002_auto_20140904_1357'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SpreadsheetContactDetail',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('type', models.TextField()),
                 ('value', models.TextField()),
                 ('label', models.TextField()),
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SpreadsheetLink',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('url', models.TextField()),
                 ('note', models.TextField()),
             ],
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SpreadsheetMembership',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('post_name', models.TextField()),
                 ('role', models.TextField()),
             ],
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SpreadsheetPerson',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('name', models.TextField()),
                 ('image', models.TextField()),
                 ('party', models.TextField(blank=True)),
@@ -64,31 +64,13 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
-        migrations.AddField(
-            model_name='spreadsheetmembership',
-            name='person',
-            field=models.ForeignKey(to='upload.SpreadsheetPerson'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='spreadsheetlink',
-            name='person',
-            field=models.ForeignKey(to='upload.SpreadsheetPerson'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='spreadsheetcontactdetail',
-            name='person',
-            field=models.ForeignKey(to='upload.SpreadsheetPerson'),
-            preserve_default=True,
-        ),
         migrations.CreateModel(
             name='SpreadsheetPersonSource',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('url', models.TextField()),
                 ('note', models.TextField()),
-                ('person', models.ForeignKey(to='upload.SpreadsheetPerson')),
+                ('person', models.ForeignKey(to='upload.SpreadsheetPerson', related_name='sources')),
             ],
             options={
             },
@@ -97,12 +79,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SpreadsheetUpload',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
-                ('created_at', models.DateTimeField(default=datetime.datetime(2014, 9, 4, 13, 50, 6, 62194))),
-                ('approved_by', models.ForeignKey(null=True, to=settings.AUTH_USER_MODEL)),
-                ('jurisdiction', models.ForeignKey(null=True, to='opencivicdata.Jurisdiction')),
-                ('rejected_by', models.ForeignKey(null=True, to=settings.AUTH_USER_MODEL)),
-                ('user', models.ForeignKey(null=True, to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('created_at', models.DateTimeField(default=datetime.datetime(2014, 9, 4, 13, 57, 51, 17428))),
+                ('approved_by', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='approvals', null=True)),
+                ('jurisdiction', models.ForeignKey(to='opencivicdata.Jurisdiction', related_name='uploads', null=True)),
+                ('rejected_by', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='rejections', null=True)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, related_name='uploads', null=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='SpreadsheetUploadSource',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('url', models.TextField()),
+                ('note', models.TextField()),
+                ('upload', models.ForeignKey(to='upload.SpreadsheetUpload', related_name='sources')),
             ],
             options={
             },
@@ -111,19 +105,25 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='spreadsheetperson',
             name='spreadsheet',
-            field=models.ForeignKey(to='upload.SpreadsheetUpload'),
+            field=models.ForeignKey(to='upload.SpreadsheetUpload', related_name='people'),
             preserve_default=True,
         ),
-        migrations.CreateModel(
-            name='SpreadsheetUploadSource',
-            fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
-                ('url', models.TextField()),
-                ('note', models.TextField()),
-                ('upload', models.ForeignKey(to='upload.SpreadsheetUpload')),
-            ],
-            options={
-            },
-            bases=(models.Model,),
+        migrations.AddField(
+            model_name='spreadsheetmembership',
+            name='person',
+            field=models.ForeignKey(to='upload.SpreadsheetPerson', related_name='memberships'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='spreadsheetlink',
+            name='person',
+            field=models.ForeignKey(to='upload.SpreadsheetPerson', related_name='links'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='spreadsheetcontactdetail',
+            name='person',
+            field=models.ForeignKey(to='upload.SpreadsheetPerson', related_name='contacts'),
+            preserve_default=True,
         ),
     ]
