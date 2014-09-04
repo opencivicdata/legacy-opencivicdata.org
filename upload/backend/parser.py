@@ -231,7 +231,7 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
                  "google+", "instagram",
                  "linkedin", "flickr",
                  "youtube", "blog",
-                 "webform"]
+                 "pinterest", "webform"]
 
         sources = ["source"]
 
