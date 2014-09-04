@@ -3,8 +3,9 @@ import csv
 from .xlrd import xlrd_dict_reader
 from .csv import csv_dict_reader
 from ..models import (SpreadsheetUpload, SpreadsheetPerson,
-                      SpreadsheetUploadSource, SpreadsheetPersonSource,
-                      SpreadsheetLink, SpreadsheetContactDetail)
+                      SpreadsheetMembership, SpreadsheetUploadSource,
+                      SpreadsheetPersonSource, SpreadsheetLink,
+                      SpreadsheetContactDetail)
 
 from collections import defaultdict
 from contextlib import contextmanager
@@ -29,6 +30,8 @@ def people_to_pupa(stream, transaction):
         position = person.position
         district = person.district
         image = person.image
+
+        print(district)
 
         pk = (name, position, district)
         if pk in seen:
@@ -150,6 +153,28 @@ def people_to_pupa(stream, transaction):
     yield org
 
 
+def iteritems(person):
+    ignore = ["employer",]   # XXX: What to do there?
+    for key, value in person.items():
+        if not value:
+            # 'errything is optional.
+            continue
+
+        root = key
+        label = None
+
+        if "(" in key:
+            root, label = key.rsplit("(", 1)
+            root = root.strip()
+            label = label.rstrip(")").strip()
+
+        root = root.strip().replace(" ", "")
+        if root in ignore:
+            continue
+
+        yield (root, label, value)
+
+
 def import_parsed_stream(stream, user, jurisdiction, sources):
     upload = SpreadsheetUpload(user=user, jurisdiction=jurisdiction)
     upload.save()
@@ -167,18 +192,24 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
         if not person['name']:
             raise ValueError("Bad district or name")
 
-        position = person.pop("position")
-        district = person.pop("district")
-
-        if not position:
-            position = "member"
+        memberships = defaultdict(dict)
+        vital_data = ['position', 'district']
+        for root, label, value in iteritems(person):
+            if label in memberships[root]:
+                raise ValueError("Two '%s' with the same label '%s'" % (
+                    root, label
+                ))
+            memberships[root][label] = value
 
         who = SpreadsheetPerson(
             name=person.pop('name'),
             spreadsheet=upload,
-            position=position,
-            district=district,
         )
+
+        for membership in memberships['district']:
+            who.memberships.create(
+            )
+            raise Exception
 
         if 'first name' in person:
             who.given_name = person.pop('first name')
@@ -221,26 +252,9 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
                  "youtube", "blog",
                  "webform"]
 
-        ignore = ["employer",]   # XXX: What to do there?
         sources = ["source"]
 
-        for key, value in person.items():
-            if not value:
-                # 'errything is optional.
-                continue
-
-            root = key
-            label = None
-
-            if "(" in key:
-                root, label = key.rsplit("(", 1)
-                root = root.strip()
-                label = label.rstrip(")").strip()
-
-            root = root.strip().replace(" ", "")
-            if root in ignore:
-                continue
-
+        for root, label, value in iteritems(person):
             if root in sources:
                 a = SpreadsheetPersonSource(
                     person=who,

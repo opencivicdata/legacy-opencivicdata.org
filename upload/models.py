@@ -27,13 +27,20 @@ class SpreadsheetPerson(models.Model):
     name = models.TextField()
     image = models.TextField()
     party = models.TextField(blank=True)
-    position = models.TextField()
-    district = models.TextField()
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
     spreadsheet = models.ForeignKey(SpreadsheetUpload, related_name='people')
     code = models.TextField()
     # HStore here.
+
+
+class SpreadsheetMembership(models.Model):
+    person = models.ForeignKey(
+        SpreadsheetPerson,
+        related_name='memberships'
+    )
+    post_name = models.TextField()
+    role = models.TextField()
 
 
 class SpreadsheetContactDetail(models.Model):
