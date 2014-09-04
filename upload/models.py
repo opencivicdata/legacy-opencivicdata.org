@@ -39,7 +39,7 @@ class SpreadsheetMembership(models.Model):
         SpreadsheetPerson,
         related_name='memberships'
     )
-    post_name = models.TextField()
+    district = models.TextField()
     role = models.TextField()
 
 

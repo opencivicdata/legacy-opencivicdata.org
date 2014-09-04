@@ -155,7 +155,7 @@ def people_to_pupa(stream, transaction):
 
 def iteritems(person):
     ignore = ["employer",]   # XXX: What to do there?
-    for key, value in person.items():
+    for key, value in person.copy().items():
         if not value:
             # 'errything is optional.
             continue
@@ -172,7 +172,7 @@ def iteritems(person):
         if root in ignore:
             continue
 
-        yield (root, label, value)
+        yield (key, root, label, value)
 
 
 def import_parsed_stream(stream, user, jurisdiction, sources):
@@ -194,22 +194,25 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
 
         memberships = defaultdict(dict)
         vital_data = ['position', 'district']
-        for root, label, value in iteritems(person):
+        for key, root, label, value in iteritems(person):
+            if root not in vital_data:
+                continue
+
+            person.pop(key)
+
             if label in memberships[root]:
                 raise ValueError("Two '%s' with the same label '%s'" % (
                     root, label
                 ))
             memberships[root][label] = value
 
+        if memberships['district'] == {}:
+            raise ValueError("No roles found.")
+
         who = SpreadsheetPerson(
             name=person.pop('name'),
             spreadsheet=upload,
         )
-
-        for membership in memberships['district']:
-            who.memberships.create(
-            )
-            raise Exception
 
         if 'first name' in person:
             who.given_name = person.pop('first name')
@@ -237,6 +240,17 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
 
         who.save()
 
+        for index in memberships['district']:
+            position = memberships['position'].get(index)
+            district = memberships['district'][index]
+            if position is None:
+                position = 'member'
+
+            who.memberships.create(
+                district=district,
+                role=position
+            )
+
         contact_details = {
             "address": "address",
             "phone": "voice",
@@ -254,7 +268,7 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
 
         sources = ["source"]
 
-        for root, label, value in iteritems(person):
+        for key, root, label, value in iteritems(person):
             if root in sources:
                 a = SpreadsheetPersonSource(
                     person=who,
