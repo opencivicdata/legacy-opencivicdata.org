@@ -1926,4 +1926,4 @@ ocd-division/country:us/state:wi/place:wrightstown,ocd-jurisdiction/country:us/s
 ocd-division/country:us/state:wi/place:wyeville,ocd-jurisdiction/country:us/state:wi/place:wyeville/government,Wyeville, WI
 ocd-division/country:us/state:wi/place:wyocena,ocd-jurisdiction/country:us/state:wi/place:wyocena/government,Wyocena, WI
 ocd-division/country:us/state:wi/place:yuba,ocd-jurisdiction/country:us/state:wi/place:yuba/government,Yuba, WI
-ocd-division/country:us/state:wi/county:walworth/place:whitewater,ocd-division/country:us/state:wi/county:walworth/place:whitewater/government,"Whitewater, WI"
+ocd-division/country:us/state:wi/county:walworth/place:whitewater,ocd-jurisdiction/country:us/state:wi/county:walworth/place:whitewater/government,"Whitewater, WI"
