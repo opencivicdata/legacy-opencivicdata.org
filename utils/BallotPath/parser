@@ -43,6 +43,7 @@ for sheet, stream in process(*sys.argv[1:]):
         'Position Description / Responsibilities',
         'Address of Where to Send App.',
         codecs.encode('qre43rj4', 'rot13'),
+        'Optional Multnomah County VP Forms: ',
     ]
     for x in ignore:
         if x in data:
