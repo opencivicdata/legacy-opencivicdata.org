@@ -208,7 +208,7 @@ h5, .h5 {
     color:#666666;
 }
 
-li p.intro {
+li p.intro, p.list {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: bold;
     line-height: 26px;
@@ -217,6 +217,9 @@ li p.intro {
     margin-right: 30px;
 }
 
+p.list {
+	text-align: center;
+}
 li p {
     margin-bottom: 5px;
 }
@@ -235,6 +238,11 @@ li p {
 
 .panel-highlight p {
     text-align: left;
+}
+
+.panel-header img {
+	margin: 5px auto;
+	display:block;
 }
 
 #updates {
