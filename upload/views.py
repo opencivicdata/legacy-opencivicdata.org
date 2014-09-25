@@ -11,6 +11,7 @@ from .models import SpreadsheetUpload
 from opencivicdata.models import Jurisdiction
 
 import json
+from pupa.utils import JSONEncoderPlus
 
 
 @login_required
@@ -133,5 +134,5 @@ def migrate(request):
         return render(request, "data/upload/public/migrate.html", {
             "transaction": transaction,
             "report": report,
-            "report_pretty": json.dumps(report, indent=4),
+            # "report_pretty": json.dumps(report, indent=4, cls=JSONEncoderPlus),
         })
