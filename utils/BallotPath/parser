@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+
+import codecs
+import xlrd
+import sys
+import re
+
+from pupa.scrape import Person
+
+
+def process(xls_file):
+    with open(xls_file, 'rb') as fd:
+        book = xlrd.open_workbook(file_contents=fd.read())
+        for sheet in book.sheets():
+            yield (sheet, handle_sheet(sheet))
+
+
+def handle_sheet(sheet):
+    for lrow in iter([sheet.row(x) for x in range(sheet.nrows)]):
+        header, *row = (x.value for x in lrow)
+        if header == "":
+            continue
+        yield (header, row)
+
+
+def process_sheet(*args):
+    for sheet, stream in process(*args):
+        jurisdiction_name = sheet.name
+        if jurisdiction_name in [
+            'Applications, Documents',
+        ]:
+            continue
+
+        with open("{}.csv".format(jurisdiction_name), 'w') as fd:
+            fd.write("Name,Position,District\n")
+            for name, position, district in datastream(sheet, stream):
+                fd.write(",".join([name, position, district]) + "\n")
+
+
+def datastream(sheet, stream):
+        data = dict(stream)
+        ignore = [
+            'Age Requirement',
+            'Links to Applications / Documents',
+            'Residency Requirements',
+            'Paid / Unpaid - Salary',
+            'Professional Requirement',
+            'Position Level',
+            'Filing Fees',
+            'County',
+            'Position Description / Responsibilities',
+            'Address of Where to Send App.',
+            codecs.encode('qre43rj4', 'rot13'),
+            'Optional Multnomah County VP Forms: ',
+        ]
+        for x in ignore:
+            if x in data:
+                data.pop(x)
+
+        if 'Current Position Holder' in data:
+            persons = data.pop('Current Position Holder')
+            districts = data.pop('District / Jurisdiction')
+            titles = data.pop('Position Title')
+            durations = data.pop('Position Duration')
+            elections = data.pop('Date of Next Election & Application Deadline')
+            for person, district, title, duration, election in zip(
+                persons, districts, titles, durations, elections
+            ):
+                yield (person, district, title)
+
+        assert data == {}, data.keys()
+
+
+process_sheet(*sys.argv[1:])

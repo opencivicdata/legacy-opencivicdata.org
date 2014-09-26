@@ -10,9 +10,13 @@ from ..models import (SpreadsheetUpload, SpreadsheetPerson,
 from collections import defaultdict
 from contextlib import contextmanager
 from pupa.scrape.popolo import Organization, Person
+from opencivicdata.models import Jurisdiction as DBJurisdiction
 
 
 def people_to_pupa(stream, transaction):
+    jurisdiction = DBJurisdiction.objects.get(id=transaction.jurisdiction.id)
+    division_id = jurisdiction.division_id
+
     org = Organization(
         name=transaction.jurisdiction.name,
         classification='legislature',
@@ -68,7 +72,11 @@ def people_to_pupa(stream, transaction):
             parties[person.party].append(person.sources.all())
 
         for post, org in posts.items():
-            org.add_post(label=post, role=post)
+            org.add_post(
+                label=post,
+                role=post,
+                division_id=division_id,
+            )
 
         if image:
             obj.image = image
