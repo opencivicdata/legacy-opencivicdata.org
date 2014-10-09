@@ -27,8 +27,8 @@ class SpreadsheetPerson(models.Model):
     name = models.TextField()
     image = models.TextField()
     party = models.TextField(blank=True)
-    start_date = models.DateField(null=True)
-    end_date = models.DateField(null=True)
+    start_date = models.DateField(blank=True)
+    end_date = models.DateField(blank=True)
     spreadsheet = models.ForeignKey(SpreadsheetUpload, related_name='people')
     code = models.TextField()
     # HStore here.

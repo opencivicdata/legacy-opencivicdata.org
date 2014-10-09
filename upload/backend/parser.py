@@ -54,6 +54,15 @@ def people_to_pupa(stream, transaction):
             obj = Person(name=name)
             people[name] = obj
 
+        pcache = {}
+        for post, org in posts.items():
+            post_obj = org.add_post(
+                label=post,
+                role=post,
+                division_id=division_id,
+            )
+            pcache[post] = post_obj._id
+
         for membership in person.memberships.all():
             role = membership.role   # TOWN OF FOO CLERK (F00)
             district = membership.district   # Town of Foo
@@ -62,6 +71,7 @@ def people_to_pupa(stream, transaction):
                 organization=org,
                 label=role,
                 role=role,
+                post_id=pcache.get(role),
                 start_date=start_date,
                 end_date=end_date,
             )
@@ -70,13 +80,6 @@ def people_to_pupa(stream, transaction):
         if person.party:
             obj._party = person.party
             parties[person.party].append(person.sources.all())
-
-        for post, org in posts.items():
-            org.add_post(
-                label=post,
-                role=post,
-                division_id=division_id,
-            )
 
         if image:
             obj.image = image
