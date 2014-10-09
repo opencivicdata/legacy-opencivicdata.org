@@ -71,7 +71,7 @@ def people_to_pupa(stream, transaction):
                 organization=org,
                 label=role,
                 role=role,
-                post_id=pcache.get(role),
+                # post_id=pcache.get(role),
                 start_date=start_date,
                 end_date=end_date,
             )
