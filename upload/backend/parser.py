@@ -9,7 +9,7 @@ from ..models import (SpreadsheetUpload, SpreadsheetPerson,
 
 from collections import defaultdict
 from contextlib import contextmanager
-from pupa.scrape.popolo import Organization, Person
+from pupa.scrape.popolo import Organization, Person, Post
 from opencivicdata.models import Jurisdiction as DBJurisdiction
 
 
@@ -55,6 +55,12 @@ def people_to_pupa(stream, transaction):
             people[name] = obj
 
         pcache = {}
+        post = Post(label='member', role='member',
+                    organization_id=org._id,
+                    division_id=division_id)
+        org._related.append(post)
+        pcache[None] = post._id
+
         for post, org in posts.items():
             post_obj = org.add_post(
                 label=post,
@@ -71,7 +77,7 @@ def people_to_pupa(stream, transaction):
                 organization=org,
                 label=role,
                 role=role,
-                # post_id=pcache.get(role),
+                post_id=pcache.get(role, pcache[None]),
                 start_date=start_date,
                 end_date=end_date,
             )
