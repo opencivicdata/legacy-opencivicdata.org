@@ -77,6 +77,10 @@ h1 object {
     min-width: 290px;
 }
 
+h1 .img-responsive {
+	max-width: 480px;
+}
+
 a > object {
   pointer-events: none;
 }
