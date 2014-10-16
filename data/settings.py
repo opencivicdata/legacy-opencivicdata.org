@@ -5,7 +5,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'ec2-54-90-229-49.compute-1.amazonaws.com',
+    'opencivicdata.org',
+]
 
 ADMINS = (
     ('Paul Tagliamonte', 'paultag@sunlightfoundation.com'),
