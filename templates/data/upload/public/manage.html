@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<h1>Changeset {{transaction.id}} for <i>{{transaction.jurisdiction.name}}</i></h1>
+<h2>Changeset {{transaction.id}} for <i>{{transaction.jurisdiction.name}}</i></h2>
 The Jurisdiction ID for this changeset is
 <code>{{transaction.jurisdiction.id}}</code>
 <br /><br />
@@ -18,7 +18,7 @@ The following people need review:<br />
 This data was uploaded by a user that wasn't logged in.
 {% endif %}
 
-<h1>Global sources</h1>
+<h5>Global sources</h5>
 
 <table>
     <tr>
@@ -36,7 +36,7 @@ This data was uploaded by a user that wasn't logged in.
 </table>
 
 {% for person in transaction.people.all %}
-<h1>{{person.name}}</h1>
+<h5>{{person.name}}</h5>
 
 {% if person.image %}
     <img class='thumbnail' src="{{person.image}}" alt="{{person.name}}"/>
@@ -138,7 +138,7 @@ This data was uploaded by a user that wasn't logged in.
 
     {% if user.is_staff %}
 
-<h1>Migrate People</h1>
+<h5>Migrate People</h5>
 
 If all this looks OK, we can do a migration:
 
@@ -151,7 +151,7 @@ If all this looks OK, we can do a migration:
 
     {% else %}
 
-<h1>Migration Status</h1>
+<h5>Migration Status</h5>
 This change has not been migrated into the database yet. Please contact
 an administrator if you'd like to see this migrated.
 
@@ -159,7 +159,7 @@ an administrator if you'd like to see this migrated.
 
 {% else %}
 
-<h1>Action already taken</h1>
+<h5>Action already taken</h5>
 
 {% if transaction.approved_by %}
 <div class='alert-success'>

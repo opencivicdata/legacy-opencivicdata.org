@@ -1,10 +1,9 @@
 {% extends "data/base.html" %}
 
 {% block content %}
-
-    <h1>How to Upload</h1>
-
-    <p>
+    
+	
+	<p style="float:right;">
     {% if user == None %}
         You're not currently logged in. If you want to connect yourself
         to this dataset, please <a href="/login/sunlight/" >Login</a>
@@ -13,17 +12,19 @@
     {% endif %}
     </p>
 
-    We accept data in a particular format - that format is documented on the
-    <a href="{% url "spreadsheet_guide" %}">Spreadsheet Guide</a>
+    <h2>How to Upload</h2>
 
-    <h1>Upload new data</h1>
+    <p class="intro">We accept data in a particular format - that format is documented on the
+    <a href="{% url "spreadsheet_guide" %}">Spreadsheet Guide</a>. Download the <a href="https://s3.amazonaws.com/opencivicdata/house-of-cards.csv">sample spreadsheet</a>.</p>
+
+    <h2>Upload new data</h2>
 
     <form action="" method="POST" enctype="multipart/form-data">
         <table>
             {% csrf_token %}
             {{ form.as_table }}
         </table>
-        <input type="submit" value="submit" />
+        <input class="ocd-btn" type="submit" value="submit" />
     </form>
 
     <script>

@@ -2,22 +2,23 @@
 
 {% block content %}
 
-<h1>How to format your Spreadsheet</h1>
+<h2>How to format your Spreadsheet</h2>
 
-The spreadsheet accepts data in a very simple format, which is aimed to cover
-input of the most basic information about a particular Jurisdiction.
+<p class="intro">The spreadsheet accepts data in a very simple format, which is aimed to cover
+input of the most basic information about a particular Jurisdiction. Or download the <a href="https://s3.amazonaws.com/opencivicdata/house-of-cards.csv">sample spreadsheet</a><p> 
+	
 
-<h2>Basic Format</h2>
+<h5>Basic Format</h5>
 
-You can include any subset of fields below, with the exception of
+<p>You can include any subset of fields below, with the exception of
 <code>Name</code>, which is required for all sheets. In addition, you may
 add a <i>label</i> to any of the headers, which is denoted by surounding the
 label with parentheses after the Header key. For instance, both
-<code>Address</code> and <code>Address (home)</code> are good column names.
+<code>Address</code> and <code>Address (home)</code> are good column names.<p>
 
-<h2>Example Data</h2>
+<h5>Example Data</h5>
 
-<table border="1px">
+<table class="sample-table">
     <tr>
         <th>Name</th>
         <th>District</th>
@@ -47,7 +48,7 @@ label with parentheses after the Header key. For instance, both
     </tr>
 </table>
 
-<h2>Column Names</h2>
+<h5>Column Names</h5>
 
 <dl>
     <!-- -->

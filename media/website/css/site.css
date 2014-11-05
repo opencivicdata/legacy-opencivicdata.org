@@ -212,6 +212,28 @@ h5, .h5 {
     color:#666666;
 }
 
+.sample-table td{
+	border: solid 1px #C5CC14;
+	padding:8px;
+}
+
+.sample-table th{
+	background: #D9E200;
+	border: solid 1px #C5CC14;
+	padding:8px;
+	color: #666666;
+}
+
+table.sample-table {
+	margin-bottom: 40px;
+	margin-top: 15px;
+}
+
+dt {
+	color: #666666;
+	font-size: 14px;
+}
+
 li p.intro, p.list {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: bold;
