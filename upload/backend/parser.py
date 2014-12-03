@@ -174,7 +174,7 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
 
     for person in stream:
         if not person['name']:
-            raise ValueError("Bad district or name")
+            raise ValueError("One row is missing a name!")
 
         memberships = defaultdict(dict)
         vital_data = ['position', 'district']
@@ -191,7 +191,7 @@ def import_parsed_stream(stream, user, jurisdiction, sources):
             memberships[root][label] = value
 
         if memberships['district'] == {}:
-            raise ValueError("No roles found.")
+            raise ValueError("A row is missing District information")
 
         who = SpreadsheetPerson(
             name=person.pop('name'),
