@@ -1,0 +1,48 @@
+{% extends "data/base.html" %}
+
+
+{% block content %}
+
+<div>
+
+  <script>
+    $(function(){
+      $("#reports").tablesorter();
+    });
+  </script>
+
+  <table class="sample-table tablesorter" id="reports">
+
+    <thead>
+      <tr>
+        <th></th>
+        {% for object_type, num_measures in object_types.items %}
+          <th colspan="{{ num_measures }}">{{ object_type }}</th>
+        {% endfor %}
+      </tr>
+      <tr>
+        <th>Jurisdiction</th>
+        {% for measure in measures %}
+          <th>{{ measure }} </th>
+        {% endfor %}
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        {% for jurisdiction, measures_by_type in measures_by_jurisdiction.items %}
+          <td>{{ jurisdiction }}</td>
+          {% for object_type, measures in measures_by_type.items %}
+            {% for measure, value in measures.items %}
+              <td>{{ value | floatformat:1 }} </td>
+            {% endfor %}
+          {% endfor %}
+        </tr>      
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+</div>
+
+{% endblock %}
