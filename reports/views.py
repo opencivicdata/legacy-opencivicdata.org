@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max
 
-from pupa.models import RunPlan, Measures
+from pupa.models import RunPlan, DataQualityChecks
 
 
 @login_required
@@ -13,15 +13,15 @@ def report(request):
     newest_plans_by_jurisdiction = RunPlan.objects.values('jurisdiction').annotate(newest_plan=Max('id')).values_list('newest_plan', flat=True)
 
     # Identify all measures that have been run in any of these reports
-    newest_measures_by_jurisdiction = Measures.objects.filter(plan__id__in=newest_plans_by_jurisdiction)
-    all_measures = set([(x.object_type, x.measure) for x in newest_measures_by_jurisdiction])
+    newest_measures_by_jurisdiction = DataQualityChecks.objects.filter(plan__id__in=newest_plans_by_jurisdiction)
+    all_measures = set([(x.type.object_type, x.type.name) for x in newest_measures_by_jurisdiction])
     all_measures = sorted(sorted(all_measures, key=lambda x: x[1]), key=lambda x: x[0])
 
     # Split the measures into categories by jurisdiction and object type
     measures_by_jurisdiction = {}
 
     for jurisdiction in newest_plans_by_jurisdiction:
-        measures = Measures.objects.filter(plan__id=jurisdiction)
+        measures = DataQualityChecks.objects.filter(plan__id=jurisdiction)
 
         # Initialize all measures, in case divisions differ in which they use
         measures_by_type = OrderedDict()
@@ -31,7 +31,7 @@ def report(request):
             measures_by_type[measure[0]][measure[1]] = None
 
         for measure in measures:
-            measures_by_type[measure.object_type][measure.measure] = measure.value
+            measures_by_type[measure.type.object_type][measure.type.name] = measure.value
 
         jurisdiction_name = RunPlan.objects.get(id=jurisdiction).jurisdiction
         measures_by_jurisdiction[jurisdiction_name] = measures_by_type
