@@ -16,25 +16,25 @@
     <thead>
       <tr>
         <th></th>
-        {% for object_type, num_measures in object_types.items %}
-          <th colspan="{{ num_measures }}">{{ object_type }}</th>
+        {% for object_type, num_checks in object_types.items %}
+          <th colspan="{{ num_checks }}">{{ object_type }}</th>
         {% endfor %}
       </tr>
       <tr>
         <th>Jurisdiction</th>
-        {% for measure in measures %}
-          <th>{{ measure }} </th>
+        {% for check in checks %}
+          <th>{{ check }} </th>
         {% endfor %}
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        {% for jurisdiction, measures_by_type in measures_by_jurisdiction.items %}
+        {% for jurisdiction, checks_by_type in checks_by_jurisdiction.items %}
           <td>{{ jurisdiction }}</td>
-          {% for object_type, measures in measures_by_type.items %}
-            {% for measure, value in measures.items %}
-              <td>{{ value | floatformat:1 }} </td>
+          {% for object_type, checks in checks_by_type.items %}
+            {% for check, value in checks.items %}
+              <td class="bad-cell">{{ value | floatformat:1 }} </td>
             {% endfor %}
           {% endfor %}
         </tr>      
