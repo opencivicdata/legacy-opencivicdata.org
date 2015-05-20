@@ -34,7 +34,11 @@
           <td>{{ jurisdiction }}</td>
           {% for object_type, checks in checks_by_type.items %}
             {% for check, value in checks.items %}
-              <td class="bad-cell">{{ value | floatformat:1 }} </td>
+              <td
+                {% if value.1 %}
+                  class="bad-cell"
+                {% endif %}
+              >{{ value.0 | floatformat:1 }} </td>
             {% endfor %}
           {% endfor %}
         </tr>      

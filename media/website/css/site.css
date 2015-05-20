@@ -224,6 +224,10 @@ h5, .h5 {
 	color: #666666;
 }
 
+.bad-cell {
+    background-color: #fc7c7d;
+}
+
 table.sample-table {
 	margin-bottom: 40px;
 	margin-top: 15px;

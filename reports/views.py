@@ -31,7 +31,8 @@ def report(request):
             checks_by_type[check[0]][check[1]] = None
 
         for check in checks:
-            checks_by_type[check.type.object_type][check.type.name] = check.value
+            bad_cell = (check.value > check.type.bad_range)
+            checks_by_type[check.type.object_type][check.type.name] = (check.value, bad_cell)
 
         jurisdiction_name = RunPlan.objects.get(id=jurisdiction).jurisdiction
         checks_by_jurisdiction[jurisdiction_name] = checks_by_type
