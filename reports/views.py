@@ -32,7 +32,12 @@ def report(request):
 
         for check in checks:
             bad_cell = (check.value > check.type.bad_range)
-            checks_by_type[check.type.object_type][check.type.name] = (check.value, bad_cell)
+            # Assume that checks values are either percentages or counts
+            if check.type.is_percentage:
+                value = str(int(check.value)) + "%"
+            else:
+                value = str(int(check.value))
+            checks_by_type[check.type.object_type][check.type.name] = (value, bad_cell)
 
         jurisdiction_name = RunPlan.objects.get(id=jurisdiction).jurisdiction
         checks_by_jurisdiction[jurisdiction_name] = checks_by_type
