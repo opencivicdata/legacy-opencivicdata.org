@@ -1,0 +1,52 @@
+{% extends "data/base.html" %}
+
+
+{% block content %}
+
+<div>
+
+  <script>
+    $(function(){
+      $("#reports").tablesorter({ sortList: [[0,0],] });
+    });
+  </script>
+
+  <table class="sample-table tablesorter" id="reports">
+
+    <thead>
+      <tr>
+        <th></th>
+        {% for object_type, num_checks in object_types.items %}
+          <th colspan="{{ num_checks }}">{{ object_type }}</th>
+        {% endfor %}
+      </tr>
+      <tr>
+        <th>Jurisdiction</th>
+        {% for check in checks %}
+          <th>{{ check }} </th>
+        {% endfor %}
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        {% for jurisdiction, checks_by_type in checks_by_jurisdiction.items %}
+          <td>{{ jurisdiction }}</td>
+          {% for object_type, checks in checks_by_type.items %}
+            {% for check, value in checks.items %}
+              <td
+                {% if value.1 %}
+                  class="bad-cell"
+                {% endif %}
+              >{{ value.0 }}</td>
+            {% endfor %}
+          {% endfor %}
+        </tr>      
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+</div>
+
+{% endblock %}

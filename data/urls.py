@@ -6,6 +6,7 @@ urlpatterns = patterns('',
 
     url(r'^upload/', include('upload.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^report/$', 'reports.views.report', name='report'),
 
     url('', include('social.apps.django_app.urls', namespace='social')),
 )
